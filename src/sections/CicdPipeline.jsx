@@ -50,8 +50,8 @@ const CicdPipeline = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-baseline gap-4 mb-24">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight">
-            <span className="text-devops-primary font-mono mr-2">09.</span> CI/CD Deployment Pipeline
+          <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight uppercase">
+            DevOps <span className="text-devops-primary">CI/CD Pipeline</span>
           </h2>
           <div className="h-px bg-devops-border flex-1 w-full md:w-auto mt-4 md:mt-0"></div>
           <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-devops-card border border-devops-border text-[10px] font-mono text-devops-secondary">

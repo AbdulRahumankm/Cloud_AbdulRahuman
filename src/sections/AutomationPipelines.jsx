@@ -45,8 +45,8 @@ const AutomationPipelines = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-baseline gap-4 mb-20">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight">
-            <span className="text-devops-primary font-mono mr-2">10.</span> Unified <span className="text-devops-secondary">Workflow Automation</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight uppercase">
+            Workflow <span className="text-devops-secondary">Automation Pipeline</span>
           </h2>
           <div className="h-px bg-devops-border flex-1 w-full md:w-auto mt-4 md:mt-0"></div>
         </div>

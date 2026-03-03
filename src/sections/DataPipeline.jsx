@@ -60,8 +60,8 @@ const DataPipeline = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-baseline gap-4 mb-24">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight">
-            <span className="text-devops-primary font-mono mr-2">08.</span> Engineering Pipelines
+          <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight uppercase">
+            Infrastructure <span className="text-devops-secondary">Data Pipeline</span>
           </h2>
           <div className="h-px bg-devops-border flex-1 w-full md:w-auto mt-4 md:mt-0"></div>
         </div>
@@ -70,36 +70,36 @@ const DataPipeline = () => {
         <div className="bg-devops-card/30 border border-devops-border rounded-3xl p-12 mb-20 backdrop-blur-sm shadow-2xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 lg:gap-8">
             <PipelineNode 
-              name="Sources" 
-              description="Logs, Metrics, APIs"
-              icon={<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 7c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 12c0 2 1.5 3 3.5 3s3.5-1 3.5-3" /></svg>}
+              name="Devices" 
+              description="Edge, IoT, Server"
+              icon={<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>}
             />
             <FlowArrow />
             
             <PipelineNode 
-              name="Ingestion" 
-              description="Wazuh, Fluentbit"
+              name="Log Collection" 
+              description="Wazuh, Ingestion"
               icon={<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" /></svg>}
             />
             <FlowArrow />
 
             <PipelineNode 
-              name="Process" 
-              description="n8n, Python"
+              name="Processing" 
+              description="n8n logic, ETL"
               icon={<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg>}
             />
             <FlowArrow />
 
             <PipelineNode 
               name="Storage" 
-              description="Elastic, Postgres"
-              icon={<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+              description="Elasticsearch"
+              icon={<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 7c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 12c0 2 1.5 3 3.5 3s3.5-1 3.5-3" /></svg>}
             />
             <FlowArrow />
 
             <PipelineNode 
-              name="Insights" 
-              description="Grafana Panels"
+              name="Dashboard" 
+              description="Grafana Hub"
               icon={<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.5l5 5V17a2 2 0 01-2 2z" /></svg>}
             />
           </div>

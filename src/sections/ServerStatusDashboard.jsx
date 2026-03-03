@@ -50,39 +50,60 @@ const ServerStatusDashboard = () => {
 
         {/* Live Metrics / Console Feed */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 bg-[#0a0f18] border border-devops-border rounded-2xl p-6 font-mono overflow-hidden">
+          <div className="lg:col-span-2 bg-[#0a0f18] border border-devops-border rounded-2xl p-6 font-mono overflow-hidden h-[400px] flex flex-col">
              <div className="flex items-center justify-between mb-4 pb-4 border-b border-devops-border/30">
                 <span className="text-[10px] text-devops-textMuted uppercase tracking-widest flex items-center gap-2">
                   <svg className="w-3 h-3 text-devops-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                   Real-time System Logs
                 </span>
-                <span className="text-[9px] text-emerald-400">STREAMING @ 120kb/s</span>
+                <span className="text-[9px] text-emerald-400 font-bold">LIVE STREAM</span>
              </div>
-             <div className="space-y-2 text-[11px] leading-relaxed opacity-70">
-                <div className="flex gap-4"><span className="text-devops-textMuted">23:58:12</span> <span className="text-emerald-500">[OK]</span> <span>Health-check passed for pod/web-balancer-291</span></div>
-                <div className="flex gap-4"><span className="text-devops-textMuted">23:58:14</span> <span className="text-blue-500">[INFO]</span> <span>n8n workflow triggered via external VPC call</span></div>
-                <div className="flex gap-4"><span className="text-devops-textMuted">23:58:18</span> <span className="text-devops-primary">[SRE]</span> <span>Automatic scale up issued: target=docker-node-03</span></div>
-                <div className="flex gap-4"><span className="text-devops-textMuted">23:58:22</span> <span className="text-emerald-500">[OK]</span> <span>Wazuh integrity check completed: 0 threats found</span></div>
+             <div className="space-y-2 text-[11px] leading-relaxed opacity-70 overflow-hidden flex-1">
+                <div className="flex gap-4"><span className="text-devops-textMuted">00:15:12</span> <span className="text-emerald-500">[OK]</span> <span>Health-check passed: cloudflare-daemon</span></div>
+                <div className="flex gap-4"><span className="text-devops-textMuted">00:15:14</span> <span className="text-blue-500">[INFO]</span> <span>n8n workflow 81a initiated</span></div>
+                <div className="flex gap-4"><span className="text-devops-textMuted">00:15:18</span> <span className="text-devops-primary">[SRE]</span> <span>Syncing local Docker state to Prometheus</span></div>
+                <div className="flex gap-4"><span className="text-devops-textMuted">00:15:22</span> <span className="text-emerald-500">[OK]</span> <span>Wazuh integrity check: 0 threats</span></div>
+                <div className="flex gap-4"><span className="text-devops-textMuted">00:15:25</span> <span className="text-blue-500">[INFO]</span> <span>Ingesting IoT metrics from edge-device-01</span></div>
+                <div className="flex gap-4"><span className="text-devops-textMuted">00:15:28</span> <span className="text-emerald-500">[OK]</span> <span>Container swap successful: web-v1.4.2</span></div>
                 <div className="animate-pulse text-devops-primary">_</div>
              </div>
           </div>
 
-          <div className="bg-[#0a0f18] border border-devops-border rounded-2xl p-6 flex flex-col">
-             <div className="flex items-center gap-2 mb-6">
-                <svg className="w-5 h-5 text-devops-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                <h4 className="text-xs font-bold text-devops-text uppercase tracking-widest">Resource Load</h4>
-             </div>
-             <div className="space-y-6 flex-1 flex flex-col justify-center">
-                <div>
-                   <div className="flex justify-between text-[10px] text-devops-textMuted mb-2 uppercase"><span>Cluster CPU Usage</span> <span>42%</span></div>
-                   <div className="h-1.5 bg-devops-bg rounded-full overflow-hidden border border-devops-border/30">
-                      <div className="h-full bg-gradient-to-r from-devops-primary to-devops-secondary w-[42%]"></div>
+          <div className="space-y-6">
+             {/* Metrics Panel */}
+             <div className="bg-[#0a0f18] border border-devops-border rounded-2xl p-6">
+                <div className="flex items-center gap-2 mb-6">
+                   <svg className="w-4 h-4 text-devops-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                   <h4 className="text-[10px] font-bold text-devops-text uppercase tracking-widest">Resource Metrics</h4>
+                </div>
+                <div className="space-y-5">
+                   <div>
+                      <div className="flex justify-between text-[9px] text-devops-textMuted mb-1.5 uppercase"><span>CPU Load</span> <span>42%</span></div>
+                      <div className="h-1 bg-devops-bg rounded-full overflow-hidden border border-devops-border/20">
+                         <div className="h-full bg-devops-primary w-[42%]"></div>
+                      </div>
+                   </div>
+                   <div>
+                      <div className="flex justify-between text-[9px] text-devops-textMuted mb-1.5 uppercase"><span>Memory</span> <span>64%</span></div>
+                      <div className="h-1 bg-devops-bg rounded-full overflow-hidden border border-devops-border/20">
+                         <div className="h-full bg-devops-secondary w-[64%]"></div>
+                      </div>
                    </div>
                 </div>
-                <div>
-                   <div className="flex justify-between text-[10px] text-devops-textMuted mb-2 uppercase"><span>Infrastructure RAM</span> <span>6.4 GB / 16 GB</span></div>
-                   <div className="h-1.5 bg-devops-bg rounded-full overflow-hidden border border-devops-border/30">
-                      <div className="h-full bg-gradient-to-r from-devops-secondary to-blue-500 w-[64%]"></div>
+             </div>
+
+             {/* Alerts Panel */}
+             <div className="bg-[#0a0f18] border border-orange-500/20 rounded-2xl p-6">
+                <div className="flex items-center gap-2 mb-4">
+                   <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                   <h4 className="text-[10px] font-bold text-devops-text uppercase tracking-widest">Active Alerts</h4>
+                </div>
+                <div className="space-y-3">
+                   <div className="text-[10px] p-2 bg-orange-500/5 border border-orange-500/10 rounded-lg text-orange-200/60 leading-tight">
+                      <span className="text-orange-500 font-bold mr-2">WARN</span> Disk usage on node-01 reaching threshold (82%)
+                   </div>
+                   <div className="text-[10px] p-2 bg-devops-primary/5 border border-devops-primary/10 rounded-lg text-devops-textMuted leading-tight italic">
+                      No critical incidents detected in last 24h
                    </div>
                 </div>
              </div>
