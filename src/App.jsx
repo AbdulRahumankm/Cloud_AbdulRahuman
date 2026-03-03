@@ -9,6 +9,7 @@ import ServerStatusDashboard from './sections/ServerStatusDashboard';
 import CloudArchitecture from './sections/CloudArchitecture';
 import DataPipeline from './sections/DataPipeline';
 import CicdPipeline from './sections/CicdPipeline';
+import AutomationPipelines from './sections/AutomationPipelines';
 import ContactSection from './sections/ContactSection';
 import Contact from './sections/Contact';
 import './App.css'; 
@@ -31,6 +32,8 @@ function App() {
       <DataPipeline />
       <div className="section-divider"></div>
       <CicdPipeline />
+      <div className="section-divider"></div>
+      <AutomationPipelines />
       <div className="section-divider"></div>
       <ContactSection />
       <Contact />
