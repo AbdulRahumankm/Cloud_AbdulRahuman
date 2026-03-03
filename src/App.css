@@ -1,0 +1,5 @@
+/* Cleaned out vite default styles. Relying on Tailwind in index.css */
+
+html {
+  scroll-behavior: smooth;
+}
