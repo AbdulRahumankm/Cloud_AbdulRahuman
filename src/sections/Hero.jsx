@@ -1,135 +1,133 @@
 import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
-  const [terminalLines, setTerminalLines] = useState([]);
-  const [currentLineIndex, setCurrentLineIndex] = useState(0);
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(true);
-
-  const lines = [
-    { text: '$ whoami', isCommand: true },
-    { text: 'abdul_rahuman', isCommand: false },
-    { text: '$ cat title.txt', isCommand: true },
-    { text: 'Cloud & Infrastructure Engineer', isCommand: false },
-    { text: '$ systemctl status motivation', isCommand: true },
-    { text: '● motivation.service - L1 Technical Support | DevOps Enthusiast', isCommand: false },
-    { text: '   Active: active (running) since Boot', isCommand: false },
-    { text: '$ docker ps | grep production', isCommand: true },
-    { text: '9b3f...  auto_scaler   Up 12 days   0.0.0.0:80->80/tcp', isCommand: false },
-    { text: '$ ', isCommand: true }
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const commandList = [
+    "ssh infra-admin@cloud-node-01",
+    "docker-compose.yml version: '3.8'",
+    "kubectl get nodes --show-labels",
+    "ansible-playbook configure-sre.yml",
+    "terraform apply --auto-approve",
+    "grep -r 'CRITICAL' /var/log/syslog"
   ];
 
   useEffect(() => {
-    if (currentLineIndex >= lines.length) return;
-
-    const currentLine = lines[currentLineIndex];
-
-    if (currentLine.isCommand) {
-      if (currentCharIndex < currentLine.text.length) {
-        const timeout = setTimeout(() => {
-          setCurrentCharIndex(prev => prev + 1);
-        }, 50); // Typing speed
-        return () => clearTimeout(timeout);
+    let charIndex = 0;
+    const currentCommand = commandList[currentIndex];
+    
+    const typingInterval = setInterval(() => {
+      if (charIndex < currentCommand.length) {
+        setDisplayText(currentCommand.substring(0, charIndex + 1));
+        charIndex++;
       } else {
-        const timeout = setTimeout(() => {
-          setTerminalLines(prev => [...prev, currentLine.text]);
-          setCurrentLineIndex(prev => prev + 1);
-          setCurrentCharIndex(0);
-        }, 200); // Pause after typing
-        return () => clearTimeout(timeout);
+        clearInterval(typingInterval);
+        setTimeout(() => {
+          setCurrentIndex((prev) => (prev + 1) % commandList.length);
+        }, 2000);
       }
-    } else {
-      // Print output immediately
-      const timeout = setTimeout(() => {
-        setTerminalLines(prev => [...prev, currentLine.text]);
-        setCurrentLineIndex(prev => prev + 1);
-      }, 50);
-      return () => clearTimeout(timeout);
-    }
-  }, [currentLineIndex, currentCharIndex, lines]);
+    }, 100);
+
+    return () => clearInterval(typingInterval);
+  }, [currentIndex]);
 
   return (
-    <section id="home" className="min-h-screen pt-20 pb-10 flex items-center bg-devops-bg relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none z-0">
-        <div className="absolute top-[10%] left-[5%] w-72 h-72 bg-devops-primary/20 rounded-full blur-[100px] animate-pulse"></div>
-        <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-devops-secondary/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+    <section id="hero" className="min-h-screen pt-24 flex flex-col items-center justify-center bg-devops-bg relative overflow-hidden">
+      {/* Background radial glow */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-devops-primary/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-devops-secondary/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
-          {/* Left Column - Details */}
-          <div className="text-left space-y-6">
-            <div className="inline-block px-4 py-1.5 rounded-full border border-devops-border bg-devops-card text-devops-secondary font-mono text-sm shadow-lg mb-4">
-              <span className="animate-pulse mr-2 text-devops-primary">●</span> System Online
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 flex flex-col lg:flex-row items-center gap-16">
+        <div className="flex-1 space-y-8 text-center lg:text-left">
+          <div className="space-y-4 animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-devops-card border border-devops-border text-devops-secondary text-xs uppercase tracking-widest font-mono">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-devops-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-devops-primary"></span>
+              </span>
+              Infrastructure Status: Healthy
             </div>
             
-            <h1 className="text-5xl sm:text-6xl font-extrabold text-devops-text tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-extrabold text-devops-text tracking-tight">
               Abdul <span className="text-transparent bg-clip-text bg-gradient-to-r from-devops-primary to-devops-secondary">Rahuman</span>
             </h1>
             
-            <h2 className="text-2xl sm:text-3xl font-bold text-devops-textMuted mt-2">
+            <p className="text-2xl md:text-3xl font-bold text-devops-primary">
               Cloud & Infrastructure Engineer
-            </h2>
-            
-            <p className="max-w-xl text-lg text-devops-textMuted font-mono border-l-4 border-devops-primary pl-4 mt-6">
-               L1 Technical Support | DevOps Enthusiast
             </p>
             
-            <div className="pt-8 flex flex-wrap gap-4">
-              <a href="#projects" className="px-8 py-3 bg-devops-primary text-devops-bg font-bold rounded hover:bg-emerald-400 transition-colors shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                View Projects
-              </a>
-              <a href="#contact" className="px-8 py-3 bg-transparent border border-devops-border text-devops-text rounded hover:border-devops-secondary hover:text-devops-secondary transition-colors font-medium">
-                Contact Me
-              </a>
-            </div>
+            <p className="text-lg md:text-xl text-devops-textMuted max-w-2xl mx-auto lg:mx-0 leading-relaxed font-mono">
+              L1 Technical Support Engineer | Docker | Linux | Cloud Monitoring
+            </p>
           </div>
 
-          {/* Right Column - Animated Terminal */}
-          <div className="relative group perspective-1000 mt-10 lg:mt-0 shadow-2xl">
-            <div className="absolute -inset-1 bg-gradient-to-r from-devops-primary to-devops-secondary rounded-lg blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-            
-            <div className="relative bg-[#0a0f18] rounded-lg ring-1 ring-devops-border overflow-hidden transform transition-all duration-500 hover:scale-[1.02]">
-              {/* Terminal Header */}
-              <div className="flex items-center px-4 py-3 bg-[#1e293b] border-b border-devops-border">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-                <div className="mx-auto text-xs text-devops-textMuted font-mono text-center flex-1 pr-6">
-                  bash - root@cloud-server:~
-                </div>
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+            <a href="#infra-projects" className="px-8 py-4 bg-devops-primary text-devops-bg font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)] active:scale-95">
+              View Infrastructure
+            </a>
+            <a href="/resume.pdf" download className="px-8 py-4 border border-devops-border text-devops-text font-bold rounded-lg transition-all duration-300 hover:bg-devops-card hover:border-devops-secondary hover:text-devops-secondary active:scale-95">
+              Download Resume
+            </a>
+          </div>
+        </div>
+
+        {/* Dashboard Visualizer */}
+        <div className="flex-1 w-full max-w-xl animate-slide-up">
+          <div className="bg-[#0f172a] rounded-xl border border-devops-border shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
+            <div className="bg-[#1e293b] px-4 py-3 flex items-center justify-between border-b border-devops-border">
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+              </div>
+              <div className="text-devops-textMuted text-[10px] font-mono tracking-widest uppercase">root@sre-dashboard:~</div>
+            </div>
+            <div className="p-8 font-mono text-xs md:text-sm min-h-[300px] space-y-6">
+              <div className="flex gap-2 text-devops-secondary">
+                <span>➜</span>
+                <span className="text-devops-textMuted">/opt/infra</span>
+                <span className="text-devops-text whitespace-pre">{displayText}</span>
+                <span className="w-2.5 h-5 bg-devops-primary animate-pulse inline-block align-middle"></span>
               </div>
               
-              {/* Terminal Body */}
-              <div className="p-5 font-mono text-sm sm:text-base text-devops-textMuted h-80 overflow-y-auto">
-                {terminalLines.map((line, idx) => (
-                  <div key={idx} className={`mb-1 ${line.startsWith('$') ? 'text-devops-secondary' : 'text-devops-text'}`}>
-                    {line}
+              <div className="grid grid-cols-2 gap-4 pt-6">
+                <div className="p-4 rounded bg-devops-card/50 border border-devops-border/50">
+                  <div className="text-[10px] text-devops-textMuted uppercase mb-1">CPU Load</div>
+                  <div className="text-devops-primary text-xl font-bold">12.4%</div>
+                  <div className="w-full bg-devops-bg h-1 mt-2 rounded-full overflow-hidden">
+                    <div className="bg-devops-primary w-[12%] h-full"></div>
                   </div>
-                ))}
-                
-                {/* Currently typed line */}
-                {currentLineIndex < lines.length && lines[currentLineIndex].isCommand && (
-                  <div className="mb-1 text-devops-secondary flex items-center">
-                    <span>{lines[currentLineIndex].text.substring(0, currentCharIndex)}</span>
-                    <span className="w-2 h-5 bg-devops-text animate-pulse ml-1 inline-block"></span>
+                </div>
+                <div className="p-4 rounded bg-devops-card/50 border border-devops-border/50">
+                  <div className="text-[10px] text-devops-textMuted uppercase mb-1">Net Traffic</div>
+                  <div className="text-devops-secondary text-xl font-bold">1.2 Gbps</div>
+                  <div className="w-full bg-devops-bg h-1 mt-2 rounded-full overflow-hidden">
+                    <div className="bg-devops-secondary w-[45%] h-full animate-pulse"></div>
                   </div>
-                )}
-                
-                {/* Blinking cursor after finished */}
-                {currentLineIndex >= lines.length && (
-                  <div className="mb-1 text-devops-secondary flex items-center">
-                    <span className="w-2 h-5 bg-devops-text animate-pulse ml-1 inline-block"></span>
-                  </div>
-                )}
+                </div>
+              </div>
+
+              <div className="space-y-2 opacity-60">
+                <div className="flex justify-between items-center text-[10px] text-devops-textMuted border-b border-devops-border/20 pb-1">
+                  <span>LOG STREAM</span>
+                  <span>ID</span>
+                  <span>TIME</span>
+                </div>
+                <div className="flex justify-between text-[11px] text-emerald-400/80">
+                  <span>[INFO] Auth success</span>
+                  <span>0x7f32</span>
+                  <span>2ms ago</span>
+                </div>
+                <div className="flex justify-between text-[11px] text-blue-400/80">
+                  <span>[DB] Sync complete</span>
+                  <span>0xa1c4</span>
+                  <span>14ms ago</span>
+                </div>
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </section>

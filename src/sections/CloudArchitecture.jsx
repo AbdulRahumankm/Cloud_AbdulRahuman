@@ -21,8 +21,15 @@ const Node = ({ name, icon, isFlowing }) => (
   </div>
 );
 
-const ConnectionLine = () => (
-  <div className="hidden md:flex flex-1 h-px bg-gradient-to-r from-devops-border via-devops-secondary/30 to-devops-border relative overflow-hidden items-center">
+const ConnectionLabel = ({ label }) => (
+  <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-devops-secondary bg-devops-bg px-2 py-0.5 rounded border border-devops-secondary/20 whitespace-nowrap z-20">
+    {label}
+  </span>
+);
+
+const ConnectionLine = ({ label }) => (
+  <div className="hidden md:flex flex-1 h-px bg-gradient-to-r from-devops-border via-devops-secondary/30 to-devops-border relative items-center">
+    <ConnectionLabel label={label} />
     {/* Flowing Pulse Animation */}
     <div className="absolute inset-0 w-20 bg-gradient-to-r from-transparent via-devops-primary/40 to-transparent h-full animate-flow-right"></div>
   </div>
@@ -35,45 +42,39 @@ const CloudArchitecture = () => {
       <style>{`
         @keyframes flow-right {
           0% { transform: translateX(-100%); }
-          100% { transform: translateX(400%); }
+          100% { transform: translateX(500%); }
         }
         .animate-flow-right {
-          animation: flow-right 3s linear infinite;
+          animation: flow-right 4s linear infinite;
         }
       `}</style>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row items-baseline gap-4 mb-16">
+        <div className="flex flex-col md:flex-row items-baseline gap-4 mb-24">
           <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight">
-            <span className="text-devops-primary font-mono mr-2">06.</span> Cloud Infrastructure Topology
+            <span className="text-devops-primary font-mono mr-2">06.</span> Infrastructure Topology
           </h2>
           <div className="h-px bg-devops-border flex-1 w-full md:w-auto mt-4 md:mt-0"></div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 mt-20">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4 mt-20">
           <Node 
             name="User" 
             icon={<svg className="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>}
           />
-          <ConnectionLine />
+          <ConnectionLine label="HTTPS/SSL" />
           
           <Node 
             name="Cloudflare" 
             icon={<svg className="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>}
           />
-          <ConnectionLine />
-
-          <Node 
-            name="Secure Tunnel" 
-            icon={<svg className="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>}
-          />
-          <ConnectionLine />
+          <ConnectionLine label="SECURE TUNNEL" />
 
           <Node 
             name="Home Server" 
             icon={<svg className="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>}
           />
-          <ConnectionLine />
+          <ConnectionLine label="LOCAL BRIDGE" />
 
           <Node 
             name="Docker / Services" 
