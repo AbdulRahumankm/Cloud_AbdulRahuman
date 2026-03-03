@@ -26,11 +26,18 @@ const ContactSection = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-devops-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left">
-        <div className="flex flex-col md:flex-row items-baseline gap-4 mb-20">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight">
-            <span className="text-devops-primary font-mono mr-2">07.</span> Contact Node
+        <div className="flex flex-col md:flex-row items-baseline gap-4 mb-12">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight uppercase">
+            Contact <span className="text-devops-primary">Node</span>
           </h2>
           <div className="h-px bg-devops-border flex-1 w-full md:w-auto mt-4 md:mt-0"></div>
+        </div>
+
+        <div className="mb-20 max-w-3xl">
+          <p className="text-devops-textMuted text-lg leading-relaxed font-medium">
+            Available for <span className="text-devops-primary font-bold">Cloud, DevOps, and Infrastructure Engineering</span> opportunities. 
+            Connect via my terminal interfaces below to discuss infrastructure architecting and platform reliability.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

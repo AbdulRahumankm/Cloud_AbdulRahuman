@@ -49,18 +49,20 @@ const Hero = () => {
               </span>
               Infrastructure Status: Healthy
             </div>
-            
-            <h1 className="text-5xl md:text-7xl font-extrabold text-devops-text tracking-tight">
-              Abdul <span className="text-transparent bg-clip-text bg-gradient-to-r from-devops-primary to-devops-secondary">Rahuman</span>
+            <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-devops-text tracking-tight animate-fade-in">
+              Abdul <span className="text-devops-primary">Rahuman</span>
             </h1>
-            
-            <p className="text-2xl md:text-3xl font-bold text-devops-primary">
-              Cloud & Infrastructure Engineer
-            </p>
-            
-            <p className="text-lg md:text-xl text-devops-textMuted max-w-2xl mx-auto lg:mx-0 leading-relaxed font-mono">
-              L1 Technical Support Engineer | Docker | Linux | Cloud Monitoring
-            </p>
+            <h2 className="text-2xl md:text-3xl font-mono text-devops-secondary font-bold tracking-tight animate-slide-up">
+              Cloud | DevOps | Data Platform Engineer
+            </h2>
+          </div>
+
+          <p className="max-w-2xl text-devops-textMuted text-lg md:text-xl leading-relaxed animate-fade-in font-medium">
+            SRE-focused engineer specializing in architecting resilient <span className="text-devops-primary">self-hosted infrastructure</span>, 
+            end-to-end <span className="text-devops-secondary">automation pipelines</span>, and high-fidelity <span className="text-devops-accent">observability systems</span>. 
+            Proven expertise in managing mission-critical containerized environments and automated deployment workflows.
+          </p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">

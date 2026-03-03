@@ -58,17 +58,17 @@ const About = () => {
         </div>
 
         {/* Narrative */}
-        <div className="mb-16 max-w-3xl text-lg text-devops-textMuted leading-relaxed space-y-4">
-          <p>
-            I am a dedicated Cloud and Infrastructure Engineer transitioning from a strong foundation in L1 Technical Support. 
-            My passion lies at the intersection of systems engineering, problem solving, and designing automated solutions 
-            that make infrastructure resilient.
-          </p>
-          <p>
-            I thrive in debugging complex environments and strongly believe that every recurring issue is simply a task 
-            waiting to be automated. Here is what I do best:
-          </p>
-        </div>
+          <div className="space-y-6 text-devops-textMuted text-lg leading-relaxed">
+            <p>
+              I am a <span className="text-devops-primary font-bold">Platform Engineer</span> dedicated to bridge the gap between development and operations through robust infrastructure-as-code and automated delivery systems. My approach centers on building scalable, self-healing architectures that prioritize security and high visibility.
+            </p>
+            <p>
+              With a deep focus on <span className="text-devops-secondary font-bold">Cloud Operations</span> and <span className="text-devops-accent font-bold">Site Reliability Engineering</span>, I architect private cloud environments using Docker Swarm and Proxmox, secure remote access via Zero-Trust tunnels, and implement centralized telemetry stacks for real-time infrastructure auditing.
+            </p>
+            <p>
+              By leveraging event-driven automation through n8n and Python, I transform manual overhead into streamlined, reliable workflows, ensuring that critical data and services are always available and highly performant.
+            </p>
+          </div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

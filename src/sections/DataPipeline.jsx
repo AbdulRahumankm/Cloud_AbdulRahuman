@@ -66,6 +66,13 @@ const DataPipeline = () => {
           <div className="h-px bg-devops-border flex-1 w-full md:w-auto mt-4 md:mt-0"></div>
         </div>
 
+        <div className="mb-16 max-w-3xl">
+          <p className="text-devops-textMuted text-lg leading-relaxed">
+            Designing <span className="text-devops-secondary font-bold">telemetry pipelines</span> that collect, process, and analyze system-wide logs and metrics. 
+            This data-driven approach provides actionable insights into infrastructure health, ensuring high availability and proactive threat detection across all platform layers.
+          </p>
+        </div>
+
         {/* Animated Architecture Flow */}
         <div className="bg-devops-card/30 border border-devops-border rounded-3xl p-12 mb-20 backdrop-blur-sm shadow-2xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 lg:gap-8">

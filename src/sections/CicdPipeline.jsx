@@ -59,6 +59,13 @@ const CicdPipeline = () => {
           </div>
         </div>
 
+        <div className="mb-16 max-w-3xl">
+          <p className="text-devops-textMuted text-lg leading-relaxed">
+            Architecting robust <span className="text-devops-primary font-bold">continuous delivery</span> systems that automate the entire lifecycle from source code commit to production monitoring. 
+            By leveraging containerization and automated quality gates, I ensure rapid, reliable, and secure software releases with zero manual intervention.
+          </p>
+        </div>
+
         {/* Global Pipeline Visualization */}
         <div className="bg-[#111827]/50 border border-devops-border rounded-3xl p-8 md:p-16 backdrop-blur-md shadow-inner relative">
           {/* Dashboard Header Info */}

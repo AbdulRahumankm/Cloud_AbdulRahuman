@@ -51,6 +51,13 @@ const AutomationPipelines = () => {
           <div className="h-px bg-devops-border flex-1 w-full md:w-auto mt-4 md:mt-0"></div>
         </div>
 
+        <div className="mb-16 max-w-3xl">
+          <p className="text-devops-textMuted text-lg leading-relaxed">
+            Implementing <span className="text-devops-secondary font-bold">event-driven automation systems</span> that orchestrate complex cross-platform workflows. 
+            By integrating disparate APIs and services through logic-based triggers, I eliminate manual toil and ensure consistent, scalable operations across the entire infrastructure.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* n8n Visualizer */}
           <div className="bg-[#0f172a] rounded-3xl border border-devops-border p-8 md:p-12 shadow-2xl relative overflow-hidden group">

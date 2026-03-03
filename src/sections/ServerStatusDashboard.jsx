@@ -42,6 +42,13 @@ const ServerStatusDashboard = () => {
           </div>
         </div>
 
+        <div className="mb-16 max-w-3xl">
+          <p className="text-devops-textMuted text-lg leading-relaxed">
+            Implementing <span className="text-devops-primary font-bold">full-stack observability</span> through centralized logging, real-time metrics, and proactive alerting. 
+            By maintaining deep system visibility, I ensure high service-level objectives (SLOs) and rapid incident response across distributed infrastructure environments.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-12">
           {monitoringItems.map((item, index) => (
             <StatusCard key={index} {...item} />
