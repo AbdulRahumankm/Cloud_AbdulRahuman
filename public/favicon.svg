@@ -1,6 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M17.5 19L19 19C21.2091 19 23 17.2091 23 15C23 12.7909 21.2091 11 19 11C19 7.13401 15.866 4 12 4C9.1171 4 6.64333 5.74313 5.57895 8.23255C3.07849 8.71804 1 10.925 1 14C1 17.3137 3.68629 20 7 20L7.5 20" />
-  <rect x="9" y="10" width="6" height="2" rx="0.5" fill="#10b981" stroke="none" />
-  <rect x="9" y="13.5" width="6" height="2" rx="0.5" fill="#10b981" stroke="none" />
-  <rect x="9" y="17" width="6" height="2" rx="0.5" fill="#10b981" stroke="none" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Terminal Chevron -->
+  <path d="M6 10L12 16L6 22" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Data Pipeline / Connection Path -->
+  <path d="M14 16H20" stroke="#10b981" stroke-width="2" stroke-dasharray="2 2" opacity="0.6" />
+  
+  <!-- Nodes / Data Points -->
+  <circle cx="21" cy="16" r="3" fill="#10b981">
+    <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+  </circle>
+  
+  <path d="M24 16H28" stroke="#10b981" stroke-width="2" stroke-dasharray="1 2" opacity="0.4" />
+  
+  <!-- Terminal Underscore / Node -->
+  <rect x="14" y="21" width="6" height="2" fill="#3b82f6" rx="1">
+    <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
+  </rect>
+  
+  <!-- Background subtle glow (optional, but keep it clean for favicon) -->
+  <circle cx="16" cy="16" r="14" stroke="#10b981" stroke-opacity="0.1" stroke-width="0.5" />
 </svg>
