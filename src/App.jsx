@@ -7,6 +7,7 @@ import Projects from './sections/Projects';
 import InfrastructureProjects from './sections/InfrastructureProjects';
 import ServerStatusDashboard from './sections/ServerStatusDashboard';
 import CloudArchitecture from './sections/CloudArchitecture';
+import DataPipeline from './sections/DataPipeline';
 import ContactSection from './sections/ContactSection';
 import Contact from './sections/Contact';
 import './App.css'; 
@@ -25,6 +26,8 @@ function App() {
       <InfrastructureProjects />
       <div className="section-divider"></div>
       <CloudArchitecture />
+      <div className="section-divider"></div>
+      <DataPipeline />
       <div className="section-divider"></div>
       <ContactSection />
       <Contact />
