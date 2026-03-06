@@ -14,7 +14,7 @@ const Contact = () => {
           Although I'm not currently looking for any new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you! Let's talk infrastructure, automation, or your next big project.
         </p>
         <a 
-          href="mailto:hello@example.com" 
+          href="abdulrahuam1204@gmail.com" 
           className="inline-block px-8 py-4 border-2 border-devops-primary text-devops-primary bg-transparent rounded font-mono font-bold hover:bg-devops-primary/10 transition-colors"
         >
            Initiate Handshake

@@ -69,7 +69,7 @@ const Hero = () => {
             <a href="#infra-projects" className="px-8 py-4 bg-devops-primary text-devops-bg font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)] active:scale-95">
               View Infrastructure
             </a>
-            <a href="/resume.pdf" download className="px-8 py-4 border border-devops-border text-devops-text font-bold rounded-lg transition-all duration-300 hover:bg-devops-card hover:border-devops-secondary hover:text-devops-secondary active:scale-95">
+            <a href="/AbdulRahuman_Cloud.pdf" download className="px-8 py-4 border border-devops-border text-devops-text font-bold rounded-lg transition-all duration-300 hover:bg-devops-card hover:border-devops-secondary hover:text-devops-secondary active:scale-95">
               Download Resume
             </a>
           </div>
