@@ -2,6 +2,12 @@ import React from 'react';
 
 const projects = [
   {
+    title: "OpenClaw AI Assistant - Chuck",
+    description: "Personal AI assistant powered by Ollama, Groq, and Leonardo.ai. Features include image generation, n8n workflow automation, real-time stock market data, news fetching, and server security scanning.",
+    tech: ["OpenClaw", "Ollama", "Groq API", "Leonardo.ai", "Alpha Vantage", "GNews API", "n8n", "Telegram Bot"],
+    link: "https://github.com/openclaw/openclaw"
+  },
+  {
     title: "E-Commerce Kubernetes Cluster",
     description: "Designed and deployed a highly available Kubernetes cluster on AWS EKS for a high-traffic e-commerce platform. Implemented auto-scaling, ingress controllers, and a robust CI/CD pipeline.",
     tech: ["AWS EKS", "Terraform", "Helm", "ArgoCD"],
