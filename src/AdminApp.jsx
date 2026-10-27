@@ -9,6 +9,7 @@ const tabs = [
   { label: 'CloudOps', keys: ['cloudOps'] },
   { label: 'GitHub projects', keys: ['projects'] },
   { label: 'Contact & resume', keys: ['contact'] },
+  { label: 'Security', keys: [] },
 ];
 
 function labelFor(key) {
@@ -131,6 +132,10 @@ function fileToBase64(file) {
 export default function AdminApp() {
   const [phase, setPhase] = useState('loading');
   const [password, setPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [recoveryCode, setRecoveryCode] = useState('');
   const [content, setContent] = useState(null);
   const [source, setSource] = useState('');
   const [sha, setSha] = useState('');
@@ -200,6 +205,48 @@ export default function AdminApp() {
     setSource('');
     setSha('');
     setPhase('login');
+  }
+
+  async function changeAdminPassword(event) {
+    event.preventDefault();
+    if (newPassword !== confirmPassword) return setMessage('New passwords do not match.');
+    setBusy(true);
+    setMessage('');
+    setCommitUrl('');
+    try {
+      const result = await apiJson('/api/admin/password', postJson('PUT', { currentPassword, newPassword }));
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+      setMessage(result.message);
+      setCommitUrl(result.commitUrl || '');
+    } catch (error) {
+      setMessage(error.message);
+      if (error.status === 401 && error.message === 'Please sign in again.') setPhase('login');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function recoverPassword(event) {
+    event.preventDefault();
+    if (newPassword !== confirmPassword) return setMessage('New passwords do not match.');
+    setBusy(true);
+    setMessage('');
+    setCommitUrl('');
+    try {
+      const result = await apiJson('/api/admin/recover', postJson('POST', { recoveryCode, newPassword }));
+      setRecoveryCode('');
+      setNewPassword('');
+      setConfirmPassword('');
+      await loadContent();
+      setMessage(result.message);
+      setCommitUrl(result.commitUrl || '');
+    } catch (error) {
+      setMessage(error.message);
+    } finally {
+      setBusy(false);
+    }
   }
 
   function change(path, value) {
@@ -286,7 +333,7 @@ export default function AdminApp() {
           <div className="max-w-2xl bg-devops-card border border-devops-border rounded-2xl p-8">
             <h2 className="text-xl font-bold mb-4">One-time setup needed</h2>
             <p className="text-devops-textMuted mb-4">The admin panel is deployed, but the server needs its private credentials before sign-in can be enabled.</p>
-            <p className="text-devops-textMuted">Set PORTFOLIO_ADMIN_PASSWORD, PORTFOLIO_SESSION_SECRET and PORTFOLIO_GITHUB_TOKEN in the Vercel Production environment, then redeploy. Follow the setup steps in the repository README. Enter secrets only in Vercel, never on this public page or in chat.</p>
+            <p className="text-devops-textMuted">Set PORTFOLIO_ADMIN_PASSWORD, PORTFOLIO_SESSION_SECRET, PORTFOLIO_RECOVERY_CODE and PORTFOLIO_GITHUB_TOKEN in the Vercel Production environment, then redeploy. Follow the setup steps in the repository README. Save the recovery code privately. Enter secrets only in Vercel, never on this public page or in chat.</p>
           </div>
         )}
         {phase === 'login' && (
@@ -297,16 +344,34 @@ export default function AdminApp() {
               <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" required className="mt-2 w-full bg-devops-bg border border-devops-border rounded-lg p-3 text-devops-text" />
             </label>
             <button type="submit" disabled={busy} className="mt-6 px-6 py-3 bg-devops-primary text-devops-bg font-bold rounded-lg disabled:opacity-50">Sign in</button>
+            <button type="button" onClick={() => { setPhase('recover'); setMessage(''); }} className="block mt-5 text-sm text-devops-secondary hover:underline">Forgot password?</button>
+          </form>
+        )}
+        {phase === 'recover' && (
+          <form onSubmit={recoverPassword} className="max-w-md bg-devops-card border border-devops-border rounded-2xl p-8 space-y-5">
+            <h2 className="text-xl font-bold">Reset admin password</h2>
+            <p className="text-devops-textMuted text-sm">Use the private recovery code saved during setup. This signs out other admin sessions.</p>
+            <label className="block text-sm text-devops-textMuted">Recovery code
+              <input type="password" value={recoveryCode} onChange={(event) => setRecoveryCode(event.target.value)} autoComplete="off" required className="mt-2 w-full bg-devops-bg border border-devops-border rounded-lg p-3 text-devops-text" />
+            </label>
+            <label className="block text-sm text-devops-textMuted">New password
+              <input type="password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} autoComplete="new-password" minLength={20} maxLength={256} required className="mt-2 w-full bg-devops-bg border border-devops-border rounded-lg p-3 text-devops-text" />
+            </label>
+            <label className="block text-sm text-devops-textMuted">Confirm new password
+              <input type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} autoComplete="new-password" minLength={20} maxLength={256} required className="mt-2 w-full bg-devops-bg border border-devops-border rounded-lg p-3 text-devops-text" />
+            </label>
+            <button type="submit" disabled={busy} className="px-6 py-3 bg-devops-primary text-devops-bg font-bold rounded-lg disabled:opacity-50">Reset password</button>
+            <button type="button" onClick={() => { setPhase('login'); setMessage(''); }} className="block text-sm text-devops-secondary hover:underline">Back to sign in</button>
           </form>
         )}
         {phase === 'editor' && content && (
           <>
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+            {tabs[tabIndex].label !== 'Security' && <div className="flex flex-wrap items-center gap-3 mb-6">
               <span className="text-devops-textMuted text-sm">{dirty ? 'Unsaved changes' : 'All changes saved'}</span>
               <button type="button" disabled={!dirty || busy} onClick={save} className="px-5 py-3 bg-devops-primary text-devops-bg font-bold rounded-lg disabled:opacity-40">Save & publish</button>
               <button type="button" disabled={!dirty || busy} onClick={() => { setContent(JSON.parse(source)); setMessage('Unsaved edits discarded.'); }} className="px-4 py-3 border border-devops-border rounded-lg disabled:opacity-40">Discard edits</button>
-            </div>
-            <p className="text-devops-textMuted text-sm mb-7">Saving creates a GitHub commit. The live site updates when Vercel finishes deploying it.</p>
+            </div>}
+            {tabs[tabIndex].label !== 'Security' && <p className="text-devops-textMuted text-sm mb-7">Saving creates a GitHub commit. The live site updates when Vercel finishes deploying it.</p>}
             <div className="grid lg:grid-cols-[220px_1fr] gap-7">
               <nav aria-label="Editor sections" className="flex lg:flex-col flex-wrap gap-2 self-start">
                 {tabs.map((tab, index) => (
@@ -329,6 +394,21 @@ export default function AdminApp() {
                     <p className="text-devops-textMuted text-sm mb-4">Choose a PDF under 2 MB. This replaces the download on the live site after deployment.</p>
                     <input type="file" accept="application/pdf,.pdf" disabled={busy} onChange={uploadResume} className="text-sm text-devops-textMuted" />
                   </div>
+                )}
+                {tabs[tabIndex].label === 'Security' && (
+                  <form onSubmit={changeAdminPassword} className="max-w-lg space-y-5">
+                    <p className="text-devops-textMuted text-sm">Change your admin password here. Use at least 20 characters. Other signed-in sessions will be logged out.</p>
+                    <label className="block text-sm text-devops-textMuted">Current password
+                      <input type="password" value={currentPassword} onChange={(event) => setCurrentPassword(event.target.value)} autoComplete="current-password" required className="mt-2 w-full bg-devops-bg border border-devops-border rounded-lg p-3 text-devops-text" />
+                    </label>
+                    <label className="block text-sm text-devops-textMuted">New password
+                      <input type="password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} autoComplete="new-password" minLength={20} maxLength={256} required className="mt-2 w-full bg-devops-bg border border-devops-border rounded-lg p-3 text-devops-text" />
+                    </label>
+                    <label className="block text-sm text-devops-textMuted">Confirm new password
+                      <input type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} autoComplete="new-password" minLength={20} maxLength={256} required className="mt-2 w-full bg-devops-bg border border-devops-border rounded-lg p-3 text-devops-text" />
+                    </label>
+                    <button type="submit" disabled={busy} className="px-6 py-3 bg-devops-primary text-devops-bg font-bold rounded-lg disabled:opacity-50">Change password</button>
+                  </form>
                 )}
               </div>
             </div>

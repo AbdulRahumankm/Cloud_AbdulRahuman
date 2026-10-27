@@ -1,4 +1,5 @@
-import { createHmac, scryptSync, timingSafeEqual } from 'node:crypto';
+import { createHmac, timingSafeEqual } from 'node:crypto';
+import { currentCredential } from './credentials.js';
 
 const COOKIE_NAME = 'portfolio_admin_session';
 const SESSION_SECONDS = 8 * 60 * 60;
@@ -7,6 +8,7 @@ export function adminConfigured() {
   return Boolean(
     process.env.PORTFOLIO_ADMIN_PASSWORD?.length >= 20 &&
     process.env.PORTFOLIO_SESSION_SECRET?.length >= 32 &&
+    process.env.PORTFOLIO_RECOVERY_CODE?.length >= 24 &&
     process.env.PORTFOLIO_GITHUB_TOKEN
   );
 }
@@ -41,14 +43,6 @@ export function readJsonBody(request) {
   }
 }
 
-export function passwordMatches(candidate) {
-  if (!adminConfigured() || typeof candidate !== 'string' || candidate.length > 256) return false;
-  const salt = process.env.PORTFOLIO_SESSION_SECRET;
-  const actual = scryptSync(candidate, salt, 64);
-  const expected = scryptSync(process.env.PORTFOLIO_ADMIN_PASSWORD, salt, 64);
-  return timingSafeEqual(actual, expected);
-}
-
 function signature(payload) {
   return createHmac('sha256', process.env.PORTFOLIO_SESSION_SECRET)
     .update(payload)
@@ -60,9 +54,10 @@ function cookieOptions(request, maxAge) {
   return `Path=/api/admin; HttpOnly; SameSite=Strict; Max-Age=${maxAge}${local ? '' : '; Secure'}`;
 }
 
-export function setSessionCookie(request, response) {
+export function setSessionCookie(request, response, credentialVersion) {
   const payload = Buffer.from(JSON.stringify({
     version: 1,
+    credentialVersion,
     expires: Date.now() + SESSION_SECONDS * 1000,
   })).toString('base64url');
   response.setHeader('Set-Cookie', `${COOKIE_NAME}=${payload}.${signature(payload)}; ${cookieOptions(request, SESSION_SECONDS)}`);
@@ -72,7 +67,7 @@ export function clearSessionCookie(request, response) {
   response.setHeader('Set-Cookie', `${COOKIE_NAME}=; ${cookieOptions(request, 0)}`);
 }
 
-export function hasSession(request) {
+export async function hasSession(request) {
   if (!adminConfigured()) return false;
   const raw = request.headers.cookie || '';
   const cookie = raw.split(';').map((part) => part.trim()).find((part) => part.startsWith(`${COOKIE_NAME}=`));
@@ -85,14 +80,16 @@ export function hasSession(request) {
   if (expected.length !== supplied.length || !timingSafeEqual(expected, supplied)) return false;
   try {
     const claims = JSON.parse(Buffer.from(parts[0], 'base64url').toString('utf8'));
-    return claims.version === 1 && Number.isFinite(claims.expires) && claims.expires > Date.now();
+    if (claims.version !== 1 || !Number.isFinite(claims.expires) || claims.expires <= Date.now()) return false;
+    const current = await currentCredential();
+    return claims.credentialVersion === current.sessionVersion;
   } catch {
     return false;
   }
 }
 
-export function requireSession(request, response) {
-  if (hasSession(request)) return true;
+export async function requireSession(request, response) {
+  if (await hasSession(request)) return true;
   sendJson(response, 401, { error: 'Please sign in again.' });
   return false;
 }

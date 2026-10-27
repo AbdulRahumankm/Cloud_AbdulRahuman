@@ -8,7 +8,7 @@ const CONTENT_PATH = 'content/portfolio.json';
 
 export default async function handler(request, response) {
   if (!['GET', 'PUT'].includes(request.method)) return allowMethod(response, ['GET', 'PUT']);
-  if (!requireSession(request, response)) return;
+  if (!await requireSession(request, response)) return;
   if (request.method === 'PUT' && !isSameOrigin(request)) {
     return sendJson(response, 403, { error: 'Request origin is not allowed.' });
   }

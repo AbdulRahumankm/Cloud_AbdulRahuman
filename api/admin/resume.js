@@ -7,7 +7,7 @@ const RESUME_PATH = 'public/AbdulRahuman_ITEngineer(1).pdf';
 
 export default async function handler(request, response) {
   if (request.method !== 'PUT') return allowMethod(response, ['PUT']);
-  if (!requireSession(request, response)) return;
+  if (!await requireSession(request, response)) return;
   if (!isSameOrigin(request)) return sendJson(response, 403, { error: 'Request origin is not allowed.' });
 
   const body = readJsonBody(request);
