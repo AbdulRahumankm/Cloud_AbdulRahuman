@@ -10,10 +10,11 @@ const Navbar = () => {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <a href="#home" className="text-devops-text hover:text-devops-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+              <a href="#hero" className="text-devops-text hover:text-devops-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
               <a href="#about" className="text-devops-textMuted hover:text-devops-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
               <a href="#skills" className="text-devops-textMuted hover:text-devops-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Skills</a>
-              <a href="#projects" className="text-devops-textMuted hover:text-devops-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</a>
+              <a href="#infra-projects" className="text-devops-textMuted hover:text-devops-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">CloudOps</a>
+              <a href="#projects" className="text-devops-textMuted hover:text-devops-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">GitHub Projects</a>
               <a href="#contact" className="text-devops-textMuted hover:text-devops-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
             </div>
           </div>

@@ -1,98 +1,107 @@
 import React from 'react';
 
-const infrastructureProjects = [
+const cloudOpsWork = [
   {
-    title: "Enterprise-Grade Automation Cluster",
-    problem: "High operational costs and vendor lock-in associated with proprietary SaaS integration platforms.",
-    solution: "Architected a highly available n8n automation cluster using Docker Swarm, enabling secure, local-first task orchestration.",
-    outcome: "Reduced monthly SaaS spend by 100% while increasing data sovereignty and workflow execution speed by 40%.",
-    technologies: ["Docker Swarm", "n8n", "PostgreSQL", "Linux"],
-    status: "Production",
+    title: 'Resource discovery',
+    status: 'In development',
+    problem: 'Infrastructure is spread across multiple AWS accounts, Azure and Nutanix, so operators need a consistent view for discovery and reporting.',
+    solution: 'I am developing resource discovery and operational reporting across those environments.',
   },
   {
-    title: "Centralized Telemetry & Security Hub",
-    problem: "Fragmented infrastructure visibility across distributed nodes, leading to increased Mean Time to Recovery (MTTR).",
-    solution: "Integrated Wazuh SIEM with Prometheus and Grafana to establish a centralized observability platform for real-time auditing.",
-    outcome: "Achieved 100% visibility across edge nodes and reduced security incident response time from hours to minutes.",
-    technologies: ["Wazuh SIEM", "Prometheus", "Grafana", "ELK Stack"],
-    status: "Operational",
+    title: 'Linux health checks',
+    status: 'In development',
+    problem: 'Recurring health checks and operational reports take time when they are handled manually.',
+    solution: 'I am building Python API services and Bash checks, with runbooks to make routine analysis more repeatable.',
   },
   {
-    title: "Zero-Trust Connectivity Mesh",
-    problem: "Inherent vulnerabilities in traditional port-forwarding methods, exposing internal services to brute-force attacks.",
-    solution: "Deployed Cloudflare Tunnel (Argo) to establish an outbound-only secure mesh for internal services.",
-    outcome: "Eliminated 100% of inbound firewall risks and established identity-aware access for all private cloud assets.",
-    technologies: ["Cloudflare Tunnel", "Identity Management", "Secure Tunnels", "Argo"],
-    status: "Secure",
+    title: 'Workflow orchestration',
+    status: 'In development',
+    problem: 'Operational tasks span APIs, Docker workloads and multiple automation tools.',
+    solution: 'I am connecting Python services and Docker workloads with n8n, Celery and Temporal for coordinated workflows.',
+  },
+  {
+    title: 'Incident analysis',
+    status: 'Design stage',
+    problem: 'An incident needs useful context before an engineer decides whether to change a system.',
+    solution: 'I am designing AWS Bedrock-assisted analysis that presents findings for human review before remediation.',
   },
 ];
 
-const InfrastructureProjects = () => {
-  return (
-    <section id="infra-projects" className="py-32 bg-devops-bg relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row items-baseline gap-4 mb-20">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text tracking-tight">
-            <span className="text-devops-primary font-mono mr-2">04.</span> Core Infrastructure
-          </h2>
-          <div className="h-px bg-devops-border flex-1 w-full md:w-auto mt-4 md:mt-0"></div>
+const InfrastructureProjects = () => (
+  <section id="infra-projects" className="py-28 bg-devops-card relative">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col md:flex-row items-baseline gap-4 mb-10">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text">
+          <span className="text-devops-primary font-mono mr-2">03.</span> Featured CloudOps Work
+        </h2>
+        <div className="h-px bg-devops-border flex-1 w-full md:w-auto"></div>
+      </div>
+
+      <div className="bg-devops-bg border border-devops-primary/30 rounded-2xl p-7 md:p-10 mb-8">
+        <div className="flex flex-wrap items-center gap-3 mb-5 text-xs font-mono uppercase tracking-wider">
+          <span className="px-3 py-1 rounded-full bg-devops-primary/10 text-devops-primary border border-devops-primary/30">Work in progress</span>
+          <span className="text-devops-textMuted">TVS Supply Chain Solutions · 2026–present</span>
         </div>
+        <h3 className="text-2xl md:text-3xl font-bold text-devops-text mb-4">
+          Enterprise CloudOps Automation Platform
+        </h3>
+        <p className="text-devops-textMuted leading-relaxed max-w-4xl mb-5">
+          This is an internal team project. As an Infrastructure AIOps Engineer,
+          my contribution is to develop discovery, health checks and workflow
+          integration, and to design incident analysis that keeps engineers in
+          control of remediation. The items below describe work in progress,
+          not a completed deployment.
+        </p>
+        <p className="text-devops-secondary text-sm font-mono">
+          My role: Infrastructure AIOps Engineer · Contribution: development and operational design
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {infrastructureProjects.map((project, index) => (
-            <div
-              key={index}
-              className="group relative bg-devops-card/40 backdrop-blur-md rounded-2xl border border-devops-border overflow-hidden hover:scale-[1.02] transition-all duration-300 shadow-xl flex flex-col"
-            >
-              <div className="p-8 flex flex-col h-full">
-                <div className="flex justify-between items-start mb-6">
-                  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/50 border border-devops-border text-xs">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-devops-primary opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-devops-primary"></span>
-                    </span>
-                    <span className="font-mono text-devops-text tracking-widest uppercase">
-                      {project.status}
-                    </span>
-                  </div>
-                </div>
-
-                <h3 className="text-xl font-bold text-devops-text mb-6 group-hover:text-devops-primary transition-colors">
-                  {project.title}
-                </h3>
-                
-                <div className="space-y-4 mb-8 flex-grow text-[14px]">
-                  <div>
-                    <h4 className="text-[10px] font-mono text-devops-secondary uppercase tracking-widest mb-1 opacity-70">Problem Context</h4>
-                    <p className="text-devops-textMuted leading-relaxed">{project.problem}</p>
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-mono text-devops-primary uppercase tracking-widest mb-1 opacity-70">SRE Solution</h4>
-                    <p className="text-devops-text leading-relaxed">{project.solution}</p>
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-mono text-devops-accent uppercase tracking-widest mb-1 opacity-70">Impact & Outcome</h4>
-                    <p className="text-devops-textMuted italic leading-relaxed">{project.outcome}</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-devops-border/30">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-2 py-1 text-[10px] font-mono bg-devops-bg/50 text-devops-secondary border border-devops-secondary/30 rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
+        {cloudOpsWork.map((item) => (
+          <article key={item.title} className="bg-devops-bg p-7 rounded-xl border border-devops-border">
+            <div className="flex flex-wrap items-start justify-between gap-3 mb-5">
+              <h4 className="text-xl font-bold text-devops-text">{item.title}</h4>
+              <span className="text-xs font-mono text-devops-secondary">{item.status}</span>
+            </div>
+            <div className="space-y-4 text-sm leading-relaxed">
+              <div>
+                <p className="text-devops-accent uppercase tracking-widest text-xs font-bold mb-1">Problem</p>
+                <p className="text-devops-textMuted">{item.problem}</p>
+              </div>
+              <div>
+                <p className="text-devops-primary uppercase tracking-widest text-xs font-bold mb-1">My solution</p>
+                <p className="text-devops-textMuted">{item.solution}</p>
               </div>
             </div>
-          ))}
+          </article>
+        ))}
+      </div>
+
+      <div className="bg-devops-bg border border-devops-border rounded-2xl p-7 md:p-10">
+        <div className="flex flex-wrap items-center gap-3 mb-4">
+          <h3 className="text-2xl font-bold text-devops-text">Self-Hosted Infrastructure Lab</h3>
+          <span className="text-xs font-mono text-devops-secondary">Personal project · Built</span>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8 text-sm leading-relaxed">
+          <div>
+            <p className="text-devops-accent uppercase tracking-widest text-xs font-bold mb-2">Problem</p>
+            <p className="text-devops-textMuted">
+              I wanted a private environment for practising server operations,
+              remote access, CI/CD and automation without exposing lab services publicly.
+            </p>
+          </div>
+          <div>
+            <p className="text-devops-primary uppercase tracking-widest text-xs font-bold mb-2">My solution</p>
+            <p className="text-devops-textMuted">
+              I built a Proxmox home server and Samba NAS, connected lab devices
+              with Tailscale, and self-hosted Jenkins and n8n for practice.
+            </p>
+          </div>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default InfrastructureProjects;

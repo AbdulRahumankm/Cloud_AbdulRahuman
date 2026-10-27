@@ -43,7 +43,7 @@ const ContactSection = () => {
               Cloud, DevOps, and Infrastructure Engineering
             </span>{" "}
             opportunities. Connect via my terminal interfaces below to discuss
-            infrastructure architecting and platform reliability.
+            infrastructure operations, automation and support.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ const ContactSection = () => {
           />
           <ContactCard
             label="Email"
-            subtext="Direct Encryption"
+            subtext="Direct Email"
             link="mailto:abdulrahuman1204@gmail.com"
             icon={
               <svg
@@ -99,7 +99,7 @@ const ContactSection = () => {
               Download PDF
             </a>
             <p className="text-[10px] font-mono text-devops-textMuted mt-6 uppercase tracking-widest opacity-60">
-              System Architect Bio
+              Current Resume
             </p>
           </div>
         </div>

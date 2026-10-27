@@ -1,140 +1,71 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const commandList = [
-  "ssh infra-admin@cloud-node-01",
-  "docker-compose.yml version: '3.8'",
-  "kubectl get nodes --show-labels",
-  "ansible-playbook configure-sre.yml",
-  "terraform apply --auto-approve",
-  "grep -r 'CRITICAL' /var/log/syslog"
+const focusAreas = [
+  {
+    title: 'AWS & Kubernetes operations',
+    detail: 'EC2, EKS and VPC support across multiple accounts, including production container workloads.',
+  },
+  {
+    title: 'Infrastructure automation',
+    detail: 'Terraform infrastructure code, Python APIs, Bash health checks and Azure DevOps CI/CD.',
+  },
+  {
+    title: 'Systems & support',
+    detail: 'Linux servers, Nutanix, VPN connectivity and approved server access.',
+  },
 ];
 
-const Hero = () => {
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
+const Hero = () => (
+  <section id="hero" className="min-h-screen pt-24 flex items-center bg-devops-bg relative overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-devops-primary/10 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-devops-secondary/10 rounded-full blur-[120px]"></div>
+    </div>
 
-  useEffect(() => {
-    let charIndex = 0;
-    const currentCommand = commandList[currentIndex];
-    
-    const typingInterval = setInterval(() => {
-      if (charIndex < currentCommand.length) {
-        setDisplayText(currentCommand.substring(0, charIndex + 1));
-        charIndex++;
-      } else {
-        clearInterval(typingInterval);
-        setTimeout(() => {
-          setCurrentIndex((prev) => (prev + 1) % commandList.length);
-        }, 2000);
-      }
-    }, 100);
-
-    return () => clearInterval(typingInterval);
-  }, [currentIndex]);
-
-  return (
-    <section id="hero" className="min-h-screen pt-24 flex flex-col items-center justify-center bg-devops-bg relative overflow-hidden">
-      {/* Background radial glow */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-devops-primary/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-devops-secondary/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 flex flex-col lg:flex-row items-center gap-16">
-        <div className="flex-1 space-y-8 text-center lg:text-left">
-          <div className="space-y-4 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-devops-card border border-devops-border text-devops-secondary text-xs uppercase tracking-widest font-mono">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-devops-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-devops-primary"></span>
-              </span>
-              Infrastructure Status: Healthy
-            </div>
-            <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-devops-text tracking-tight animate-fade-in">
-              Abdul <span className="text-devops-primary">Rahuman</span>
-            </h1>
-            <h2 className="text-2xl md:text-3xl font-mono text-devops-secondary font-bold tracking-tight animate-slide-up">
-              Cloud | DevOps | Data Platform Engineer
-            </h2>
-          </div>
-
-          <p className="max-w-2xl text-devops-textMuted text-lg md:text-xl leading-relaxed animate-fade-in font-medium">
-            SRE-focused engineer specializing in architecting resilient <span className="text-devops-primary">self-hosted infrastructure</span>, 
-            end-to-end <span className="text-devops-secondary">automation pipelines</span>, and high-fidelity <span className="text-devops-accent">observability systems</span>. 
-            Proven expertise in managing mission-critical containerized environments and automated deployment workflows.
-          </p>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
-            <a href="#infra-projects" className="px-8 py-4 bg-devops-primary text-devops-bg font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)] active:scale-95">
-              View Infrastructure
-            </a>
-            <a href="/AbdulRahuman_ITEngineer(1).pdf" download className="px-8 py-4 border border-devops-border text-devops-text font-bold rounded-lg transition-all duration-300 hover:bg-devops-card hover:border-devops-secondary hover:text-devops-secondary active:scale-95">
-              Download Resume
-            </a>
-          </div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 grid lg:grid-cols-2 gap-14 items-center py-16">
+      <div className="space-y-8">
+        <div className="inline-flex px-3 py-1 rounded-full bg-devops-card border border-devops-border text-devops-secondary text-xs uppercase tracking-widest font-mono">
+          Infrastructure · Cloud · Automation
         </div>
-
-        {/* Dashboard Visualizer */}
-        <div className="flex-1 w-full max-w-xl animate-slide-up">
-          <div className="bg-[#0f172a] rounded-xl border border-devops-border shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
-            <div className="bg-[#1e293b] px-4 py-3 flex items-center justify-between border-b border-devops-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-              </div>
-              <div className="text-devops-textMuted text-[10px] font-mono tracking-widest uppercase">root@sre-dashboard:~</div>
-            </div>
-            <div className="p-8 font-mono text-xs md:text-sm min-h-[300px] space-y-6">
-              <div className="flex gap-2 text-devops-secondary">
-                <span>➜</span>
-                <span className="text-devops-textMuted">/opt/infra</span>
-                <span className="text-devops-text whitespace-pre">{displayText}</span>
-                <span className="w-2.5 h-5 bg-devops-primary animate-pulse inline-block align-middle"></span>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4 pt-6">
-                <div className="p-4 rounded bg-devops-card/50 border border-devops-border/50">
-                  <div className="text-[10px] text-devops-textMuted uppercase mb-1">CPU Load</div>
-                  <div className="text-devops-primary text-xl font-bold">12.4%</div>
-                  <div className="w-full bg-devops-bg h-1 mt-2 rounded-full overflow-hidden">
-                    <div className="bg-devops-primary w-[12%] h-full"></div>
-                  </div>
-                </div>
-                <div className="p-4 rounded bg-devops-card/50 border border-devops-border/50">
-                  <div className="text-[10px] text-devops-textMuted uppercase mb-1">Net Traffic</div>
-                  <div className="text-devops-secondary text-xl font-bold">1.2 Gbps</div>
-                  <div className="w-full bg-devops-bg h-1 mt-2 rounded-full overflow-hidden">
-                    <div className="bg-devops-secondary w-[45%] h-full animate-pulse"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-2 opacity-60">
-                <div className="flex justify-between items-center text-[10px] text-devops-textMuted border-b border-devops-border/20 pb-1">
-                  <span>LOG STREAM</span>
-                  <span>ID</span>
-                  <span>TIME</span>
-                </div>
-                <div className="flex justify-between text-[11px] text-emerald-400/80">
-                  <span>[INFO] Auth success</span>
-                  <span>0x7f32</span>
-                  <span>2ms ago</span>
-                </div>
-                <div className="flex justify-between text-[11px] text-blue-400/80">
-                  <span>[DB] Sync complete</span>
-                  <span>0xa1c4</span>
-                  <span>14ms ago</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="space-y-4">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-devops-text tracking-tight">
+            Abdul <span className="text-devops-primary">Rahuman</span>
+          </h1>
+          <h2 className="text-2xl md:text-3xl font-mono text-devops-secondary font-bold tracking-tight">
+            Infrastructure, Cloud, DevOps & AIOps Engineer
+          </h2>
+        </div>
+        <p className="max-w-2xl text-devops-textMuted text-lg md:text-xl leading-relaxed">
+          I support cloud and on-premise infrastructure at TVS Supply Chain Solutions.
+          My work spans AWS operations, Linux systems, Terraform, CI/CD and practical
+          automation for health checks and incident analysis. Remediation stays under
+          human review.
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <a href="#infra-projects" className="px-8 py-4 bg-devops-primary text-devops-bg font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)]">
+            Explore CloudOps Work
+          </a>
+          <a href="/AbdulRahuman_ITEngineer(1).pdf" download className="px-8 py-4 border border-devops-border text-devops-text font-bold rounded-lg transition-all duration-300 hover:bg-devops-card hover:border-devops-secondary">
+            Download Resume
+          </a>
         </div>
       </div>
-    </section>
-  );
-};
+
+      <div className="bg-[#0f172a] rounded-2xl border border-devops-border shadow-[0_0_50px_rgba(0,0,0,0.35)] overflow-hidden">
+        <div className="bg-[#1e293b] px-6 py-4 border-b border-devops-border">
+          <p className="text-devops-secondary text-xs font-mono uppercase tracking-widest">What I work on</p>
+        </div>
+        <div className="p-6 md:p-8 space-y-4">
+          {focusAreas.map((area) => (
+            <div key={area.title} className="p-5 rounded-xl bg-devops-card/50 border border-devops-border/60">
+              <h3 className="text-devops-primary font-bold mb-2">{area.title}</h3>
+              <p className="text-devops-textMuted text-sm leading-relaxed">{area.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 export default Hero;

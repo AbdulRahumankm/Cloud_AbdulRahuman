@@ -2,79 +2,76 @@ import React from 'react';
 
 const projects = [
   {
-    title: "OpenClaw AI Assistant - Chuck",
-    description: "Personal AI assistant powered by Ollama, Groq, and Leonardo.ai. Features include image generation, n8n workflow automation, real-time stock market data, news fetching, and server security scanning.",
-    tech: ["OpenClaw", "Ollama", "Groq API", "Leonardo.ai", "Alpha Vantage", "GNews API", "n8n", "Telegram Bot"],
-    link: "https://github.com/openclaw/openclaw"
+    title: 'AWS Infrastructure with Terraform',
+    type: 'Personal infrastructure code',
+    problem: 'A multi-AZ AWS environment needs repeatable network, compute, database, storage and access definitions.',
+    contribution: 'I authored reusable Terraform modules for VPC, EKS, RDS, S3, ALB and IAM. The repository defines public, private and database subnets, EKS managed node groups and S3 protection settings.',
+    technologies: ['Terraform', 'AWS VPC', 'EKS', 'RDS', 'S3', 'ALB', 'IAM'],
+    link: 'https://github.com/AbdulRahumankm/terraform-aws-production',
   },
   {
-    title: "E-Commerce Kubernetes Cluster",
-    description: "Designed and deployed a highly available Kubernetes cluster on AWS EKS for a high-traffic e-commerce platform. Implemented auto-scaling, ingress controllers, and a robust CI/CD pipeline.",
-    tech: ["AWS EKS", "Terraform", "Helm", "ArgoCD"],
-    link: "#"
+    title: 'Server Management System',
+    type: 'Repository I maintain',
+    problem: 'Server inventory, access and audit information need a central place for administrators.',
+    contribution: 'I maintain the project repository. Its code covers server inventory, SSH key management, role-based permissions and audit logging through a web interface and API.',
+    technologies: ['TypeScript', 'Next.js', 'PostgreSQL', 'Docker', 'RBAC'],
+    link: 'https://github.com/AbdulRahumankm/Server-Management-System',
   },
   {
-    title: "Serverless Data Pipeline",
-    description: "Built a serverless data ingestion pipeline handling 10M+ events per day using AWS Lambda, Kinesis, and DynamoDB. Reduced infrastructure costs by 40%.",
-    tech: ["AWS Lambda", "Python", "Kinesis", "DynamoDB"],
-    link: "#"
+    title: 'AI Orchestrator System',
+    type: 'Personal AIOps project',
+    problem: 'A self-hosted AI assistant needs a way to coordinate services, route requests and observe health.',
+    contribution: 'I maintain a repository with service-management scripts, model routing, monitoring and configuration for an OpenClaw-based lab system.',
+    technologies: ['Python', 'Docker', 'Service Monitoring', 'Automation'],
+    link: 'https://github.com/AbdulRahumankm/AI_Orchestrator_System',
   },
-  {
-    title: "Automated Security Auditing",
-    description: "Developed a custom tool using Python and cloud provider SDKs to automatically audit cloud resources against CIS benchmarks, integrating reports directly into Slack and Jira.",
-    tech: ["Python", "AWS SDK", "Slack API", "Docker"],
-    link: "#"
-  }
 ];
 
-const Projects = () => {
-  return (
-    <section id="projects" className="py-20 bg-devops-card">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl font-bold text-devops-text">
-              <span className="text-devops-accent font-mono">03.</span> Infrastructure Projects
-            </h2>
-            <div className="h-px bg-devops-border flex-1"></div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div key={index} className="bg-devops-bg p-8 rounded-lg border border-devops-border hover:-translate-y-2 hover:shadow-[0_10px_30px_-15px_rgba(59,130,246,0.3)] transition-all duration-300 flex flex-col h-full">
-              <div className="flex justify-between items-center mb-6">
-                <div className="text-devops-accent">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-6-6H4a2 2 0 0 0-2 2v16Z"></path>
-                    <path d="M14 2v6h6"></path>
-                    <path d="m10 13-2 2 2 2"></path>
-                    <path d="m14 17 2-2-2-2"></path>
-                  </svg>
-                </div>
-                <a href={project.link} className="text-devops-textMuted hover:text-devops-primary transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
-                </a>
-              </div>
-              <h3 className="text-xl font-bold text-devops-text mb-3">
-                {project.title}
-              </h3>
-              <p className="text-devops-textMuted text-sm mb-6 flex-grow">
-                {project.description}
-              </p>
-              <ul className="flex flex-wrap gap-3 font-mono text-xs text-devops-secondary">
-                {project.tech.map((tech, tIndex) => (
-                  <li key={tIndex}>{tech}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+const Projects = () => (
+  <section id="projects" className="py-28 bg-devops-bg">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col md:flex-row items-baseline gap-4 mb-5">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-devops-text">
+          <span className="text-devops-primary font-mono mr-2">04.</span> GitHub Projects
+        </h2>
+        <div className="h-px bg-devops-border flex-1 w-full md:w-auto"></div>
       </div>
-    </section>
-  );
-};
+      <p className="text-devops-textMuted max-w-3xl mb-12 leading-relaxed">
+        Selected repositories that show my infrastructure, operations and
+        AIOps work. Application-only development projects are available on
+        my <a href="https://github.com/AbdulRahumankm" target="_blank" rel="noopener noreferrer" className="text-devops-primary hover:underline">GitHub profile</a>.
+      </p>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-7">
+        {projects.map((project) => (
+          <article key={project.title} className="bg-devops-card/40 p-7 rounded-2xl border border-devops-border flex flex-col">
+            <p className="text-devops-secondary text-xs font-mono uppercase tracking-wider mb-3">{project.type}</p>
+            <h3 className="text-xl font-bold text-devops-text mb-6">{project.title}</h3>
+            <div className="space-y-5 text-sm leading-relaxed flex-grow">
+              <div>
+                <p className="text-devops-accent text-xs font-bold uppercase tracking-widest mb-1">Problem</p>
+                <p className="text-devops-textMuted">{project.problem}</p>
+              </div>
+              <div>
+                <p className="text-devops-primary text-xs font-bold uppercase tracking-widest mb-1">My work</p>
+                <p className="text-devops-textMuted">{project.contribution}</p>
+              </div>
+            </div>
+            <ul className="flex flex-wrap gap-2 mt-7 mb-7">
+              {project.technologies.map((technology) => (
+                <li key={technology} className="text-xs font-mono text-devops-secondary border border-devops-border rounded px-2 py-1">
+                  {technology}
+                </li>
+              ))}
+            </ul>
+            <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-devops-primary font-bold hover:underline">
+              View repository →
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 export default Projects;
