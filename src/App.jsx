@@ -7,23 +7,24 @@ import Projects from './sections/Projects';
 import InfrastructureProjects from './sections/InfrastructureProjects';
 import ContactSection from './sections/ContactSection';
 import Contact from './sections/Contact';
+import portfolioContent from '../content/portfolio.json';
 import './App.css'; 
 
-function App() {
+function App({ content = portfolioContent }) {
   return (
-    <MainLayout>
-      <Hero />
+    <MainLayout site={content.site} navigation={content.navigation}>
+      <Hero content={content.hero} />
       <div className="section-divider"></div>
-      <About />
+      <About content={content.about} />
       <div className="section-divider"></div>
-      <Skills />
+      <Skills content={content.skills} />
       <div className="section-divider"></div>
-      <InfrastructureProjects />
+      <InfrastructureProjects content={content.cloudOps} />
       <div className="section-divider"></div>
-      <Projects />
+      <Projects content={content.projects} />
       <div className="section-divider"></div>
-      <ContactSection />
-      <Contact />
+      <ContactSection content={content.contact} />
+      <Contact content={content.contact} />
     </MainLayout>
   );
 }

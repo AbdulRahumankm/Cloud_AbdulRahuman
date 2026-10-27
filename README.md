@@ -1,16 +1,34 @@
-# React + Vite
+# Abdul Rahuman portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React/Vite portfolio deployed on Vercel. Public copy lives in `content/portfolio.json`. The password-protected editor at `/admin` can update every section, project and contact detail, and replace the resume PDF. Saving content or a resume creates a commit on `main`; the connected Vercel project must deploy that commit before visitors see the change.
 
-Currently, two official plugins are available:
+## Admin setup on Vercel
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. In GitHub, create a **fine-grained personal access token** for `AbdulRahumankm/Cloud_AbdulRahuman` only. Grant **Contents: Read and write**. Set an expiry and keep the token private. The token's account must be allowed to commit directly to `main` under repository branch rules.
+2. In the Vercel project, open **Settings → Environment Variables**. Add the following to **Production**:
 
-## React Compiler
+   | Name | Value |
+   | --- | --- |
+   | `PORTFOLIO_ADMIN_PASSWORD` | A unique password of at least 20 characters |
+   | `PORTFOLIO_SESSION_SECRET` | A separate random secret of at least 32 characters |
+   | `PORTFOLIO_GITHUB_TOKEN` | The GitHub token from step 1 |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+3. Redeploy the latest `main` commit so the new environment variables are available to the functions.
+4. Open `https://cloud-abdul-rahuman.vercel.app/admin`, sign in and edit a field. **Save & publish** commits the content to GitHub; wait for Vercel's deployment to complete, then check the live site. Replacing the resume accepts a PDF under 2 MB and commits it to `public/AbdulRahuman_ITEngineer(1).pdf`.
 
-## Expanding the ESLint configuration
+Enter private values in Vercel only. Do not put them in this repository, a public issue, or chat. If a token is exposed, revoke it and create a new one. Keep the existing Vercel Git integration connected to this repository; the admin endpoint does not deploy the site itself.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Development
+
+```sh
+npm ci
+npm run dev
+npm run lint
+npm run build
+```
+
+The Vite development server serves the public UI. Vercel Functions under `api/admin/` need Vercel's runtime to operate locally; the admin page's sign-in works on the deployed project after setup.
+
+## How publishing works
+
+The public site imports `content/portfolio.json` at build time. The admin API checks a signed, HttpOnly session cookie and same-origin writes. It uses the server-only `PORTFOLIO_GITHUB_TOKEN` to update the content JSON or resume through GitHub's Contents API. The token is never included in browser code. The content API validates the expected fields, contact email and outbound HTTPS links before committing. A concurrent content edit is rejected so newer GitHub work is not overwritten.

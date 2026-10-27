@@ -2,14 +2,14 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, site, navigation }) => {
   return (
     <div className="bg-devops-bg min-h-screen font-sans antialiased text-devops-text scroll-smooth">
-      <Navbar />
+      <Navbar site={site} navigation={navigation} />
       <main>
         {children}
       </main>
-      <Footer />
+      <Footer site={site} />
     </div>
   );
 };

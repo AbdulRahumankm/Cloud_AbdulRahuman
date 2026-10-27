@@ -1,0 +1,200 @@
+{
+  "site": {
+    "brand": ">_ sys_admin",
+    "title": "Abdul Rahuman | Infrastructure, Cloud, DevOps & AIOps",
+    "description": "Abdul Rahuman's infrastructure, cloud operations, DevOps and AIOps portfolio, featuring AWS, Terraform, Linux and automation projects.",
+    "applicationName": "Cloud Abdul Rahuman Portfolio",
+    "footer": ">_ Cloud Abdul Rahuman Portfolio"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "cloudOps": "CloudOps",
+    "projects": "GitHub Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Infrastructure · Cloud · Automation",
+    "firstName": "Abdul",
+    "lastName": "Rahuman",
+    "role": "Infrastructure, Cloud, DevOps & AIOps Engineer",
+    "summary": "I support cloud and on-premise infrastructure at TVS Supply Chain Solutions. My work spans AWS operations, Linux systems, Terraform, CI/CD and practical automation for health checks and incident analysis. Remediation stays under human review.",
+    "primaryButton": "Explore CloudOps Work",
+    "resumeButton": "Download Resume",
+    "focusHeading": "What I work on",
+    "focusAreas": [
+      {
+        "title": "AWS & Kubernetes operations",
+        "detail": "EC2, EKS and VPC support across multiple accounts, including production container workloads."
+      },
+      {
+        "title": "Infrastructure automation",
+        "detail": "Terraform infrastructure code, Python APIs, Bash health checks and Azure DevOps CI/CD."
+      },
+      {
+        "title": "Systems & support",
+        "detail": "Linux servers, Nutanix, VPN connectivity and approved server access."
+      }
+    ]
+  },
+  "about": {
+    "heading": "About Me",
+    "sectionNumber": "01.",
+    "paragraphs": [
+      "I am an Infrastructure AIOps Engineer at TVS Supply Chain Solutions. I started there in L1 technical support, troubleshooting endpoints, access and connectivity, and moved into cloud and infrastructure operations.",
+      "Today I support AWS and Linux environments, work with Terraform and Azure DevOps, and develop Python and Bash tools for health checks, incident analysis and reporting. Operational changes still go through human review. Outside work, I build a self-hosted lab with Proxmox, Samba NAS, Tailscale, Jenkins and n8n."
+    ],
+    "areas": [
+      {
+        "title": "Cloud operations",
+        "description": "AWS EC2, EKS and VPC administration across multiple accounts, with production EKS workload support."
+      },
+      {
+        "title": "Linux & virtualization",
+        "description": "Linux server support in cloud and on-premise environments, Nutanix operations and a personal Proxmox lab."
+      },
+      {
+        "title": "Automation & delivery",
+        "description": "Terraform infrastructure code, Azure DevOps CI/CD, Python APIs and Bash scripts for operational work."
+      },
+      {
+        "title": "Technical support",
+        "description": "Windows endpoints, account access, VPN, LAN/Wi-Fi and server connectivity troubleshooting."
+      }
+    ]
+  },
+  "skills": {
+    "heading": "Technical Skills",
+    "sectionNumber": "02.",
+    "categories": [
+      {
+        "title": "Cloud & containers",
+        "skills": ["AWS EC2", "AWS EKS", "AWS VPC", "Azure", "Docker", "Kubernetes", "Nutanix", "Proxmox"]
+      },
+      {
+        "title": "Infrastructure & delivery",
+        "skills": ["Terraform", "Ansible", "Azure DevOps CI/CD", "Jenkins", "Git", "n8n", "Python", "Bash"]
+      },
+      {
+        "title": "Systems & support",
+        "skills": ["Linux / Ubuntu", "Windows Server", "Active Directory", "VPN & Tailscale", "LAN / Wi-Fi", "Nginx", "ServiceNow", "SFTP"]
+      },
+      {
+        "title": "Monitoring & security",
+        "skills": ["Wazuh", "Prometheus", "Grafana", "Datadog", "Veeam Backup", "N2WS", "Endpoint Protection"]
+      }
+    ]
+  },
+  "cloudOps": {
+    "heading": "Featured CloudOps Work",
+    "sectionNumber": "03.",
+    "problemLabel": "Problem",
+    "solutionLabel": "My solution",
+    "status": "Work in progress",
+    "organization": "TVS Supply Chain Solutions",
+    "period": "2026–present",
+    "title": "Enterprise CloudOps Automation Platform",
+    "intro": "This is an internal team project. As an Infrastructure AIOps Engineer, my contribution is to develop discovery, health checks and workflow integration, and to design incident analysis that keeps engineers in control of remediation. The items below describe work in progress, not a completed deployment.",
+    "role": "My role: Infrastructure AIOps Engineer · Contribution: development and operational design",
+    "work": [
+      {
+        "title": "Resource discovery",
+        "status": "In development",
+        "problem": "Infrastructure is spread across multiple AWS accounts, Azure and Nutanix, so operators need a consistent view for discovery and reporting.",
+        "solution": "I am developing resource discovery and operational reporting across those environments."
+      },
+      {
+        "title": "Linux health checks",
+        "status": "In development",
+        "problem": "Recurring health checks and operational reports take time when they are handled manually.",
+        "solution": "I am building Python API services and Bash checks, with runbooks to make routine analysis more repeatable."
+      },
+      {
+        "title": "Workflow orchestration",
+        "status": "In development",
+        "problem": "Operational tasks span APIs, Docker workloads and multiple automation tools.",
+        "solution": "I am connecting Python services and Docker workloads with n8n, Celery and Temporal for coordinated workflows."
+      },
+      {
+        "title": "Incident analysis",
+        "status": "Design stage",
+        "problem": "An incident needs useful context before an engineer decides whether to change a system.",
+        "solution": "I am designing AWS Bedrock-assisted analysis that presents findings for human review before remediation."
+      }
+    ],
+    "personalProjects": [
+      {
+        "title": "Self-Hosted Infrastructure Lab",
+        "status": "Personal project · Built",
+        "problem": "I wanted a private environment for practising server operations, remote access, CI/CD and automation without exposing lab services publicly.",
+        "solution": "I built a Proxmox home server and Samba NAS, connected lab devices with Tailscale, and self-hosted Jenkins and n8n for practice."
+      }
+    ]
+  },
+  "projects": {
+    "heading": "GitHub Projects",
+    "sectionNumber": "04.",
+    "problemLabel": "Problem",
+    "workLabel": "My work",
+    "repositoryLinkLabel": "View repository →",
+    "intro": "Selected repositories that show my infrastructure, operations and AIOps work. Application-only development projects are available on my",
+    "profileUrl": "https://github.com/AbdulRahumankm",
+    "profileLabel": "GitHub profile",
+    "items": [
+      {
+        "title": "AWS Infrastructure with Terraform",
+        "type": "Personal infrastructure code",
+        "problem": "A multi-AZ AWS environment needs repeatable network, compute, database, storage and access definitions.",
+        "contribution": "I authored reusable Terraform modules for VPC, EKS, RDS, S3, ALB and IAM. The repository defines public, private and database subnets, EKS managed node groups and S3 protection settings.",
+        "technologies": ["Terraform", "AWS VPC", "EKS", "RDS", "S3", "ALB", "IAM"],
+        "link": "https://github.com/AbdulRahumankm/terraform-aws-production"
+      },
+      {
+        "title": "Server Management System",
+        "type": "Repository I maintain",
+        "problem": "Server inventory, access and audit information need a central place for administrators.",
+        "contribution": "I maintain the project repository. Its code covers server inventory, SSH key management, role-based permissions and audit logging through a web interface and API.",
+        "technologies": ["TypeScript", "Next.js", "PostgreSQL", "Docker", "RBAC"],
+        "link": "https://github.com/AbdulRahumankm/Server-Management-System"
+      },
+      {
+        "title": "AI Orchestrator System",
+        "type": "Personal AIOps project",
+        "problem": "A self-hosted AI assistant needs a way to coordinate services, route requests and observe health.",
+        "contribution": "I maintain a repository with service-management scripts, model routing, monitoring and configuration for an OpenClaw-based lab system.",
+        "technologies": ["Python", "Docker", "Service Monitoring", "Automation"],
+        "link": "https://github.com/AbdulRahumankm/AI_Orchestrator_System"
+      }
+    ]
+  },
+  "contact": {
+    "heading": "Contact Node",
+    "intro": "Available for Cloud, DevOps, and Infrastructure Engineering opportunities. Connect with me to discuss infrastructure operations, automation and support.",
+    "links": [
+      {
+        "label": "GitHub",
+        "subtext": "Source Repositories",
+        "url": "https://github.com/AbdulRahumankm",
+        "icon": "github"
+      },
+      {
+        "label": "LinkedIn",
+        "subtext": "Professional Network",
+        "url": "https://www.linkedin.com/in/abdulrahuman1204/",
+        "icon": "linkedin"
+      }
+    ],
+    "emailLinkLabel": "Email",
+    "emailLinkSubtext": "Direct Email",
+    "resumeHeading": "Résumé",
+    "resumeButton": "Download PDF",
+    "resumeSubtext": "Current Resume",
+    "closingEyebrow": "05. What's Next?",
+    "closingHeading": "Get In Touch",
+    "closingText": "Have a question or want to discuss an opportunity? Send me an email and I'll get back to you. Let's talk infrastructure, automation, or your next project.",
+    "closingButton": "Initiate Handshake",
+    "fallbackText": "Or email",
+    "email": "abdulrahuman1204@gmail.com"
+  }
+}
