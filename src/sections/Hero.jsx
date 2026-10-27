@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
+const commandList = [
+  "ssh infra-admin@cloud-node-01",
+  "docker-compose.yml version: '3.8'",
+  "kubectl get nodes --show-labels",
+  "ansible-playbook configure-sre.yml",
+  "terraform apply --auto-approve",
+  "grep -r 'CRITICAL' /var/log/syslog"
+];
+
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const commandList = [
-    "ssh infra-admin@cloud-node-01",
-    "docker-compose.yml version: '3.8'",
-    "kubectl get nodes --show-labels",
-    "ansible-playbook configure-sre.yml",
-    "terraform apply --auto-approve",
-    "grep -r 'CRITICAL' /var/log/syslog"
-  ];
 
   useEffect(() => {
     let charIndex = 0;
@@ -69,7 +70,7 @@ const Hero = () => {
             <a href="#infra-projects" className="px-8 py-4 bg-devops-primary text-devops-bg font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)] active:scale-95">
               View Infrastructure
             </a>
-            <a href="/AbdulRahuman_Cloud.pdf" download className="px-8 py-4 border border-devops-border text-devops-text font-bold rounded-lg transition-all duration-300 hover:bg-devops-card hover:border-devops-secondary hover:text-devops-secondary active:scale-95">
+            <a href="/AbdulRahuman_ITEngineer(1).pdf" download className="px-8 py-4 border border-devops-border text-devops-text font-bold rounded-lg transition-all duration-300 hover:bg-devops-card hover:border-devops-secondary hover:text-devops-secondary active:scale-95">
               Download Resume
             </a>
           </div>
