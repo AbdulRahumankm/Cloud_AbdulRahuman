@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Node = ({ name, icon, isFlowing }) => (
+const Node = ({ name, icon }) => (
   <div className="flex flex-col items-center gap-4 relative z-10">
     <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-devops-card/60 backdrop-blur-xl border border-devops-border flex items-center justify-center text-devops-secondary shadow-2xl transition-all duration-500 hover:scale-110 group relative`}>
       {/* Background Glow */}

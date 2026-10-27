@@ -3,8 +3,8 @@ import React from 'react';
 const ContactCard = ({ icon, label, link, subtext }) => (
   <a
     href={link}
-    target="_blank"
-    rel="noopener noreferrer"
+    target={link.startsWith('http') ? '_blank' : undefined}
+    rel={link.startsWith('http') ? 'noopener noreferrer' : undefined}
     className="group relative bg-devops-card/40 backdrop-blur-xl border border-devops-border p-8 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] overflow-hidden"
   >
     {/* Inner Glow */}
@@ -22,7 +22,7 @@ const ContactCard = ({ icon, label, link, subtext }) => (
 const ContactSection = () => {
   return (
     <section
-      id="contact"
+      id="contact-links"
       className="py-32 bg-devops-bg relative overflow-hidden border-t border-devops-border/20"
     >
       {/* Background decoration */}
@@ -92,7 +92,7 @@ const ContactSection = () => {
           <div className="bg-devops-card/40 backdrop-blur-xl border border-devops-border p-8 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] overflow-hidden group">
             <h3 className="text-devops-text font-bold text-lg mb-6">Résumé</h3>
             <a
-              href="/AbdulRahuman_Cloud.pdf"
+              href="/AbdulRahuman_ITEngineer(1).pdf"
               download
               className="px-8 py-4 bg-gradient-to-r from-devops-primary to-devops-secondary text-devops-bg font-extrabold rounded-lg transition-all duration-300 hover:shadow-[0_0_25px_rgba(16,185,129,0.6)] active:scale-95 text-sm uppercase tracking-widest shadow-lg"
             >
