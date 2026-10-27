@@ -3,7 +3,7 @@ const text = '';
 const schema = {
   site: { brand: text, title: text, description: text, applicationName: text, footer: text },
   navigation: {
-    home: text, about: text, skills: text, cloudOps: text, projects: text, contact: text,
+    home: text, about: text, skills: text, cloudOps: text, projects: text, contact: text, admin: text,
   },
   hero: {
     badge: text, firstName: text, lastName: text, role: text, summary: text,

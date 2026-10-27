@@ -9,7 +9,7 @@ const MainLayout = ({ children, site, navigation }) => {
       <main>
         {children}
       </main>
-      <Footer site={site} />
+      <Footer site={site} navigation={navigation} />
     </div>
   );
 };

@@ -12,7 +12,8 @@
     "skills": "Skills",
     "cloudOps": "CloudOps",
     "projects": "GitHub Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "admin": "Admin"
   },
   "hero": {
     "badge": "Infrastructure · Cloud · Automation",
