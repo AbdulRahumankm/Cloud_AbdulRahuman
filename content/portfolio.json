@@ -13,6 +13,7 @@
       { "label": "Skills", "href": "#skills" },
       { "label": "CloudOps", "href": "#infra-projects" },
       { "label": "GitHub Projects", "href": "#projects" },
+      { "label": "Resume", "href": "#contact-links" },
       { "label": "Contact", "href": "#contact" }
     ],
     "admin": "Admin"
