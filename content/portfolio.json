@@ -7,12 +7,14 @@
     "footer": ">_ Cloud Abdul Rahuman Portfolio"
   },
   "navigation": {
-    "home": "Home",
-    "about": "About",
-    "skills": "Skills",
-    "cloudOps": "CloudOps",
-    "projects": "GitHub Projects",
-    "contact": "Contact",
+    "items": [
+      { "label": "Home", "href": "#hero" },
+      { "label": "About", "href": "#about" },
+      { "label": "Skills", "href": "#skills" },
+      { "label": "CloudOps", "href": "#infra-projects" },
+      { "label": "GitHub Projects", "href": "#projects" },
+      { "label": "Contact", "href": "#contact" }
+    ],
     "admin": "Admin"
   },
   "hero": {
@@ -169,6 +171,7 @@
       }
     ]
   },
+  "customSections": [],
   "contact": {
     "heading": "Contact Node",
     "intro": "Available for Cloud, DevOps, and Infrastructure Engineering opportunities. Connect with me to discuss infrastructure operations, automation and support.",

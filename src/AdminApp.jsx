@@ -8,6 +8,7 @@ const tabs = [
   { label: 'Skills', keys: ['skills'] },
   { label: 'CloudOps', keys: ['cloudOps'] },
   { label: 'GitHub projects', keys: ['projects'] },
+  { label: 'Custom sections', keys: ['customSections'] },
   { label: 'Contact & resume', keys: ['contact'] },
   { label: 'Security', keys: [] },
 ];
@@ -17,6 +18,9 @@ function labelFor(key) {
 }
 
 function templateAt(path) {
+  const listPath = path.slice(0, -1).filter((part) => typeof part !== 'number').join('.');
+  if (listPath === 'customSections') return { id: '', heading: '', paragraphs: [''] };
+  if (listPath === 'customSections.paragraphs') return '';
   let current = defaultContent;
   for (const part of path) current = Array.isArray(current) ? current[0] : current[part];
   return current;
@@ -81,7 +85,7 @@ function ContentEditor({ value, path, name, onChange, onAdd, onRemove, onMove })
         {value.map((item, index) => (
           <div key={index} className="bg-devops-bg/60 border border-devops-border/70 rounded-lg p-4">
             <div className="flex items-center justify-between gap-3 mb-4">
-              <span className="text-devops-secondary font-mono text-xs">{item.title || item.label || 'Item ' + (index + 1)}</span>
+              <span className="text-devops-secondary font-mono text-xs">{item.title || item.heading || item.label || 'Item ' + (index + 1)}</span>
               <div className="flex gap-2">
                 <button type="button" disabled={index === 0} onClick={() => onMove(path, index, -1)} className="text-xs text-devops-textMuted disabled:opacity-30 hover:text-devops-text">↑</button>
                 <button type="button" disabled={index === value.length - 1} onClick={() => onMove(path, index, 1)} className="text-xs text-devops-textMuted disabled:opacity-30 hover:text-devops-text">↓</button>
@@ -382,6 +386,12 @@ export default function AdminApp() {
               </nav>
               <div className="bg-devops-card/40 border border-devops-border rounded-2xl p-5 md:p-8 space-y-8">
                 <h2 className="text-2xl font-bold">{tabs[tabIndex].label}</h2>
+                {tabs[tabIndex].label === 'Site & menu' && (
+                  <p className="text-devops-textMuted text-sm">In Navigation → Items, use Add item to create a link, arrows to reorder it, or Remove to delete it. Use a section target such as #skills or #contact, or an https:// URL. New sections can be created in Custom sections.</p>
+                )}
+                {tabs[tabIndex].label === 'Custom sections' && (
+                  <p className="text-devops-textMuted text-sm">Add a section with a unique ID such as certifications, then add a navigation item pointing to #certifications. Edit its heading and paragraphs here.</p>
+                )}
                 {tabs[tabIndex].keys.map((key) => (
                   <section key={key} className="space-y-5">
                     {tabs[tabIndex].keys.length > 1 && <h3 className="text-lg font-bold text-devops-secondary">{labelFor(key)}</h3>}

@@ -2,6 +2,8 @@
 
 React/Vite portfolio deployed on Vercel. Public copy lives in `content/portfolio.json`. The password-protected editor at `/admin` can update every section, project and contact detail, replace the resume PDF, change the admin password, and recover access with a private recovery code. Saving content, a resume, or a password creates a commit on `main`; the connected Vercel project must deploy that commit before visitors see content changes.
 
+The **Site & menu** tab lets the admin add, edit, reorder and remove navigation links. Use `#about`, `#skills`, `#contact` or another existing section ID for an internal link, or an `https://` URL for an external link. The **Custom sections** tab lets the admin add a new text section with a unique ID, heading and paragraphs; link to it from the menu with `#your-id`.
+
 ## Admin setup on Vercel
 
 1. In GitHub, create a **fine-grained personal access token** for `AbdulRahumankm/Cloud_AbdulRahuman` only. Grant **Contents: Read and write**. Set an expiry and keep the token private. The token's account must be allowed to commit directly to `main` under repository branch rules.

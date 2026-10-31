@@ -3,7 +3,7 @@ const text = '';
 const schema = {
   site: { brand: text, title: text, description: text, applicationName: text, footer: text },
   navigation: {
-    home: text, about: text, skills: text, cloudOps: text, projects: text, contact: text, admin: text,
+    items: [{ label: text, href: text }], admin: text,
   },
   hero: {
     badge: text, firstName: text, lastName: text, role: text, summary: text,
@@ -31,6 +31,7 @@ const schema = {
       technologies: [text], link: text,
     }],
   },
+  customSections: [{ id: text, heading: text, paragraphs: [text] }],
   contact: {
     heading: text, intro: text,
     links: [{ label: text, subtext: text, url: text, icon: text }],
@@ -82,6 +83,23 @@ export function validateContent(content) {
   if (JSON.stringify(content).length > 100_000) return 'Content is too large.';
   const structureError = check(content, schema, 'content');
   if (structureError) return structureError;
+  const builtInIds = ['hero', 'about', 'skills', 'infra-projects', 'projects', 'contact-links', 'contact'];
+  const sectionIds = new Set(builtInIds);
+  for (const section of content.customSections) {
+    if (!/^[a-z][a-z0-9-]{0,63}$/.test(section.id) || sectionIds.has(section.id)) {
+      return 'Each custom section needs a unique ID using lowercase letters, numbers and hyphens.';
+    }
+    if (!section.heading.trim()) return 'Each custom section needs a heading.';
+    sectionIds.add(section.id);
+  }
+  for (const item of content.navigation.items) {
+    if (!item.label.trim()) return 'Each navigation item needs a label.';
+    if (item.href.startsWith('#')) {
+      if (!sectionIds.has(item.href.slice(1))) return `Navigation target ${item.href} does not exist.`;
+    } else if (!isHttpsUrl(item.href)) {
+      return 'Navigation links must use an existing #section-id or an https:// URL.';
+    }
+  }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(content.contact.email)) return 'Enter a valid contact email address.';
   if (!isHttpsUrl(content.projects.profileUrl)) return 'GitHub profile URL must start with https://.';
   for (const project of content.projects.items) {

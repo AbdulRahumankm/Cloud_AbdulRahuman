@@ -7,6 +7,7 @@ import contentHandler from '../api/admin/content.js';
 import resumeHandler from '../api/admin/resume.js';
 import passwordHandler from '../api/admin/password.js';
 import recoverHandler from '../api/admin/recover.js';
+import { validateContent } from '../api/_lib/validate.js';
 import portfolio from '../content/portfolio.json' with { type: 'json' };
 
 process.env.PORTFOLIO_ADMIN_PASSWORD = 'local-test-password-only-12345';
@@ -94,6 +95,9 @@ test('admin content, password change and recovery keep secrets private and revok
 
   const changed = structuredClone(portfolio);
   changed.hero.role = 'Updated role';
+  changed.customSections.push({ id: 'certifications', heading: 'Certifications', paragraphs: ['A new section.'] });
+  changed.navigation.items.push({ label: 'Certifications', href: '#certifications' });
+  assert.equal(validateContent(changed), null);
   const saved = response();
   await contentHandler(request('PUT', { sha: fileSha, content: changed }, { cookie: oldCookie }), saved);
   assert.equal(saved.statusCode, 200);
@@ -101,6 +105,7 @@ test('admin content, password change and recovery keep secrets private and revok
   const contentPayload = JSON.parse(contentPut.options.body);
   assert.equal(contentPayload.branch, 'main');
   assert.equal(JSON.parse(Buffer.from(contentPayload.content, 'base64').toString()).hero.role, 'Updated role');
+  assert.equal(JSON.parse(Buffer.from(contentPayload.content, 'base64').toString()).navigation.items.at(-1).href, '#certifications');
   assert.equal(contentPut.options.headers.Authorization, 'Bearer local-test-token');
 
   const uploaded = response();
@@ -153,4 +158,14 @@ test('admin content, password change and recovery keep secrets private and revok
   const recoveredLogin = response();
   await login(request('POST', { password: 'third-unique-test-password-12345' }), recoveredLogin);
   assert.equal(recoveredLogin.statusCode, 200);
+});
+
+test('navigation rejects broken section links and unsafe URLs', () => {
+  const broken = structuredClone(portfolio);
+  broken.navigation.items.push({ label: 'Missing', href: '#missing' });
+  assert.match(validateContent(broken), /does not exist/);
+  broken.navigation.items.at(-1).href = 'javascript:alert(1)';
+  assert.match(validateContent(broken), /https:\/\/ URL/);
+  broken.navigation.items.at(-1).href = 'https://example.com';
+  assert.equal(validateContent(broken), null);
 });
