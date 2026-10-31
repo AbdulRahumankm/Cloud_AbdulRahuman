@@ -37,7 +37,8 @@ export default async function handler(request, response) {
       message: 'Saved to GitHub. Vercel will publish the new content after deployment.',
     });
   } catch (error) {
-    if (error.status === 409) return sendJson(response, 409, { error: 'Content changed elsewhere. Reload and review before saving.' });
-    return sendJson(response, 502, { error: 'Could not reach GitHub. Try again later.' });
+    if ([409, 422].includes(error.status)) return sendJson(response, 409, { error: 'Content changed elsewhere or GitHub rejected the update. Reload and review before saving.' });
+    if ([401, 403].includes(error.status)) return sendJson(response, 502, { error: 'GitHub rejected the write. Check that the token has Contents: Read and write for this repository and that main allows direct commits.' });
+    return sendJson(response, 502, { error: `GitHub update failed (${error.status || 'network error'}). Try again later.` });
   }
 }

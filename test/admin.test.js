@@ -40,6 +40,7 @@ function cookieFrom(result) {
 test('admin content, password change and recovery keep secrets private and revoke old sessions', async (context) => {
   let credentialBytes = null;
   let credentialSha = fileSha;
+  let contentPutStatus = null;
   const calls = [];
   context.mock.method(globalThis, 'fetch', async (url, options) => {
     calls.push({ url, options });
@@ -52,6 +53,9 @@ test('admin content, password change and recovery keep secrets private and revok
       return { ok: true, json: async () => ({ type: 'file', encoding: 'base64', sha: fileSha, content: bytes.toString('base64') }) };
     }
     const payload = JSON.parse(options.body);
+    if (url.includes('content/portfolio.json') && contentPutStatus) {
+      return { ok: false, status: contentPutStatus };
+    }
     if (url.includes('.admin/credentials.json')) {
       credentialBytes = Buffer.from(payload.content, 'base64');
       credentialSha = 'b'.repeat(40);
@@ -107,6 +111,13 @@ test('admin content, password change and recovery keep secrets private and revok
   assert.equal(JSON.parse(Buffer.from(contentPayload.content, 'base64').toString()).hero.role, 'Updated role');
   assert.equal(JSON.parse(Buffer.from(contentPayload.content, 'base64').toString()).navigation.items.at(-1).href, '#certifications');
   assert.equal(contentPut.options.headers.Authorization, 'Bearer local-test-token');
+
+  contentPutStatus = 403;
+  const denied = response();
+  await contentHandler(request('PUT', { sha: fileSha, content: changed }, { cookie: oldCookie }), denied);
+  assert.equal(denied.statusCode, 502);
+  assert.match(denied.body.error, /Contents: Read and write/);
+  contentPutStatus = null;
 
   const uploaded = response();
   await resumeHandler(request('PUT', { contentBase64: pdf.toString('base64') }, { cookie: oldCookie }), uploaded);
